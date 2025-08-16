@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch ContactSystem",
+      "request": "launch",
+      "mainClass": "ContactSystem",
+      "projectName": "ContactManagementSystem",
+      "classPaths": [
+         "C:/Users/apurv/Downloads/ojdbc8.jar"
+      ]
+    }
+  ]
+}
