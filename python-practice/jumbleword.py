@@ -6,6 +6,6 @@ class JumbleWord:
         random.shuffle(chars)
         return ''.join(chars)
 
-jumbleWordClass = JumbleWord()
-output = JumbleWord.jumble("abcd")
+jumbleWord = JumbleWord()
+output = jumbleWord.jumble("stone")
 print(output)
