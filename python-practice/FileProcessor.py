@@ -1,5 +1,5 @@
 import csv
-from JumbleWord import JumbleWord   # ✅ Import the separate jumble class
+from JumbleWord import JumbleWord
 
 class FileProcessor:
     def __init__(self, input_file, columns_to_jumble):
@@ -17,7 +17,6 @@ class FileProcessor:
             for row in reader:
                 for col in self.columns_to_jumble:
                     if col in row and row[col]:
-                        # ✅ Use JumbleWord class instead of local method
                         row[col] = JumbleWord.jumble(row[col])
                 writer.writerow(row)
 
