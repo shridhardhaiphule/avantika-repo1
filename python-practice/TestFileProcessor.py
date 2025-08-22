@@ -6,7 +6,6 @@ from FileProcessor import FileProcessor
 class TestFileProcessor(unittest.TestCase):
 
     def setUp(self):
-        # Create a sample input CSV file
         self.input_file = "test_input.csv"
         self.output_file = "test_output.csv"
 
@@ -17,7 +16,6 @@ class TestFileProcessor(unittest.TestCase):
             writer.writerow(["2", "Bob", "Paris"])
 
     def tearDown(self):
-        # Delete test files after running
         if os.path.exists(self.input_file):
             os.remove(self.input_file)
         if os.path.exists(self.output_file):
@@ -27,15 +25,12 @@ class TestFileProcessor(unittest.TestCase):
         processor = FileProcessor(self.input_file, ["name", "city"])
         processor.processFile(self.output_file)
 
-        # Read the processed output
         with open(self.output_file, "r", encoding="utf-8") as f:
             reader = csv.DictReader(f)
             rows = list(reader)
 
-        # Check: same number of rows
         self.assertEqual(len(rows), 2)
 
-        # Check: jumbled words have same length and letters
         original_names = ["Alice", "Bob"]
         for row, original in zip(rows, original_names):
             self.assertEqual(len(row["name"]), len(original))
