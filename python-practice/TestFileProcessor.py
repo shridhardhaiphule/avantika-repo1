@@ -4,7 +4,6 @@ import os
 from FileProcessor import FileProcessor
 
 class TestFileProcessor(unittest.TestCase):
-
     def setUp(self):
         self.input_file = "test_input.csv"
         self.output_file = "test_output.csv"
@@ -21,16 +20,15 @@ class TestFileProcessor(unittest.TestCase):
         if os.path.exists(self.output_file):
             os.remove(self.output_file)
 
-    def test_processFile_jumbles_columns(self):
+    def test_process_file(self):
         processor = FileProcessor(self.input_file, ["name", "city"])
-        processor.processFile(self.output_file)
+        processor.process_file(self.output_file)
 
         with open(self.output_file, "r", encoding="utf-8") as f:
             reader = csv.DictReader(f)
             rows = list(reader)
 
         self.assertEqual(len(rows), 2)
-
         original_names = ["Alice", "Bob"]
         for row, original in zip(rows, original_names):
             self.assertEqual(len(row["name"]), len(original))
