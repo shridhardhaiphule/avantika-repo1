@@ -1,28 +1,22 @@
 import csv
-from JumbleWord import JumbleWord
+from JumbleNumber import JumbleNumber
 
 class FileProcessor:
-    def __init__(self, input_file, columns_to_jumble):
-        self.input_file = input_file
-        self.columns_to_jumble = columns_to_jumble
+    def process_file(self, input_file, output_file, columns_to_jumble):
+        jumble = JumbleNumber()
 
-    def process_file(self, output_file):
-        with open(self.input_file, "r", encoding="utf-8") as infile, \
-            open(output_file, "w", newline="", encoding="utf-8") as outfile:
+        with open(input_file, "r") as infile, open(output_file, "w", newline="") as outfile:
+            reader = csv.reader(infile)
+            rows = list(reader)
 
-            reader = csv.DictReader(infile)
-            writer = csv.DictWriter(outfile, fieldnames=reader.fieldnames)
+            fieldnames = [f"Col{i}" for i in range(len(rows[0]))]
+
+            writer = csv.DictWriter(outfile, fieldnames=fieldnames)
             writer.writeheader()
 
-            for row in reader:
-                for col in self.columns_to_jumble:
-                    if col in row and row[col]:
-                        row[col] = JumbleWord.jumble(row[col])
-                writer.writerow(row)
-
-        print("✅ Output file created:", output_file)
-
-
-if __name__ == "__main__":
-    processor = FileProcessor("input_csv_file1.csv", ["name", "city"])
-    processor.process_file("output_csv_file1.csv")
+            for row in rows:
+                row_dict = {fieldnames[i]: row[i] for i in range(len(row))}
+                for col in columns_to_jumble:
+                    if col in row_dict and row_dict[col].isdigit():
+                        row_dict[col] = jumble.jumble(row_dict[col])
+                writer.writerow(row_dict)
