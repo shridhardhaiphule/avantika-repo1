@@ -1,7 +1,7 @@
 import csv
 from JumbleNumber import JumbleNumber
 
-class FileProcessor:
+class FileProcessorNumber:
     def process_file(self, input_file, output_file, columns_to_jumble):
         jumble = JumbleNumber()
 

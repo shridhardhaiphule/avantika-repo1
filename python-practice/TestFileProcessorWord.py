@@ -1,12 +1,12 @@
 import unittest
 import csv
 import os
-from FileProcessor import FileProcessor
+from FileProcessorWord import FileProcessorWord
 
-class TestFileProcessor(unittest.TestCase):
+class TestFileProcessorWord(unittest.TestCase):
     def setUp(self):
-        self.input_file = "test_input.csv"
-        self.output_file = "test_output.csv"
+        self.input_file = "input_csv_file1.csv"
+        self.output_file = "output_csv_file1.csv"
 
         with open(self.input_file, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
@@ -14,14 +14,8 @@ class TestFileProcessor(unittest.TestCase):
             writer.writerow(["1", "Alice", "London"])
             writer.writerow(["2", "Bob", "Paris"])
 
-    def tearDown(self):
-        if os.path.exists(self.input_file):
-            os.remove(self.input_file)
-        if os.path.exists(self.output_file):
-            os.remove(self.output_file)
-
     def test_process_file(self):
-        processor = FileProcessor(self.input_file, ["name", "city"])
+        processor = FileProcessorWord(self.input_file, ["name", "city"])
         processor.process_file(self.output_file)
 
         with open(self.output_file, "r", encoding="utf-8") as f:
