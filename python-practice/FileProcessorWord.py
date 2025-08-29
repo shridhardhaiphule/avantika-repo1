@@ -1,4 +1,5 @@
 import csv
+import os
 from JumbleWord import JumbleWord
 
 class FileProcessorWord:
@@ -6,7 +7,22 @@ class FileProcessorWord:
         self.input_file = input_file
         self.columns_to_jumble = columns_to_jumble
 
+    def check_file_size(self, max_size_mb=10):
+        file_size = os.path.getsize(self.input_file)
+        file_size_mb = file_size / (1024 * 1024)
+
+        if file_size_mb < max_size_mb:
+            print(f"✅ File size is OK: {file_size_mb:.2f} MB")
+            return True
+        else:
+            print(f"❌ File too large! Size: {file_size_mb:.2f} MB (Limit {max_size_mb} MB)")
+            return False
+
     def process_file(self, output_file):
+        if not self.check_file_size():
+            print("⚠ File not processed because it exceeds the size limit.")
+            return
+
         with open(self.input_file, "r", encoding="utf-8") as infile, \
             open(output_file, "w", newline="", encoding="utf-8") as outfile:
 
@@ -25,6 +41,5 @@ class FileProcessorWord:
 
 
 if __name__ == "__main__":
-
     processor = FileProcessorWord("input_csv_file1.csv", ["name", "city"])
     processor.process_file("output_csv_file1.csv")
