@@ -1,11 +1,12 @@
 import csv
 import os
+import json
 from JumbleWord import JumbleWord
 
 class FileProcessorWord:
-    def __init__(self, input_file, columns_to_jumble):
+    def __init__(self, input_file, columns_to_jumble=None):
         self.input_file = input_file
-        self.columns_to_jumble = columns_to_jumble
+        self.columns_to_jumble = columns_to_jumble or []
 
     def check_file_size(self, max_size_mb=10):
         file_size = os.path.getsize(self.input_file)
@@ -39,7 +40,31 @@ class FileProcessorWord:
 
         print("✅ Output file created:", output_file)
 
+    def toJSON(self, output_file):
+
+        if not self.input_file.endswith(".csv"):
+            raise ValueError("❌ Input file is not a CSV")
+
+        if not os.path.exists(self.input_file) or os.path.getsize(self.input_file) == 0:
+            with open(output_file, "w", encoding="utf-8") as outfile:
+                json.dump([], outfile, indent=4)
+            print("⚠ Input CSV is empty → JSON file contains []")
+            return []
+
+        json_array = []
+        with open(self.input_file, "r", encoding="utf-8") as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                json_array.append(row)
+
+        with open(output_file, "w", encoding="utf-8") as outfile:
+            json.dump(json_array, outfile, indent=4)
+
+        print("✅ JSON file created:", output_file)
+        return json_array
+
 
 if __name__ == "__main__":
     processor = FileProcessorWord("input_csv_file1.csv", ["name", "city"])
     processor.process_file("output_csv_file1.csv")
+    processor.toJSON("output_json_file1.json")
