@@ -72,6 +72,9 @@ class TestFileProcessorWord(unittest.TestCase):
 
         self.assertIn("not a CSV", str(context.exception))
 
+    # TODO extreme file size test check the output message it should contain:"File size exceeds limit. Processing aborted" 
+    
+
 
 if __name__ == "__main__":
     unittest.main()

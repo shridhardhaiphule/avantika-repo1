@@ -21,8 +21,9 @@ class FileProcessorWord:
 
     def process_file(self, output_file):
         if not self.check_file_size():
-            print("⚠ File not processed because it exceeds the size limit.")
-            return
+            message = f"❌ File size exceeds limit. Processing aborted."
+            print(message)
+            return message
 
         with open(self.input_file, "r", encoding="utf-8") as infile, \
             open(output_file, "w", newline="", encoding="utf-8") as outfile:
