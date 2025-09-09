@@ -8,7 +8,7 @@ class FileProcessorNumber:
         max_size = 10 * 1024 * 1024
         file_size = os.path.getsize(input_file)
         if file_size > max_size:
-            raise ValueError(f"❌ Input file is too large ({file_size} bytes). Maximum allowed size is 10 MB.")
+            raise ValueError(f"File size exceeds limit. Processing aborted")
         print(f"✅ File size is OK: {file_size / (1024*1024):.2f} MB")
 
         jumble = JumbleNumber()

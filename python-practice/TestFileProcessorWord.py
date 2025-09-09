@@ -4,7 +4,9 @@ import os
 import json
 from FileProcessorWord import FileProcessorWord
 
+
 class TestFileProcessorWord(unittest.TestCase):
+
     def setUp(self):
         self.input_file = "input_csv_file1.csv"
         self.output_file = "output_csv_file1.csv"
@@ -52,12 +54,11 @@ class TestFileProcessorWord(unittest.TestCase):
         open(empty_file, "w").close()
 
         processor = FileProcessorWord(empty_file)
-        result = processor.toJSON(self.json_file)
 
-        self.assertEqual(result, [])
-        with open(self.json_file, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        self.assertEqual(data, [])
+        with self.assertRaises(ValueError) as context:
+            processor.toJSON(self.json_file)
+
+        self.assertIn("empty", str(context.exception))
 
         os.remove(empty_file)
 
@@ -67,13 +68,29 @@ class TestFileProcessorWord(unittest.TestCase):
             f.write("This is not a CSV file.")
 
         processor = FileProcessorWord(non_csv_file)
+
         with self.assertRaises(ValueError) as context:
             processor.toJSON(self.json_file)
 
         self.assertIn("not a CSV", str(context.exception))
 
-    # TODO extreme file size test check the output message it should contain:"File size exceeds limit. Processing aborted" 
-    
+        os.remove(non_csv_file)
+
+    def test_file_size_exceeds_limit(self):
+        large_file = "large_test_file.csv"
+
+        with open(large_file, "wb") as f:
+            f.seek(FileProcessorWord.MAX_FILE_SIZE + 1)
+            f.write(b"\0")
+
+        processor = FileProcessorWord(large_file)
+
+        with self.assertRaises(ValueError) as context:
+            processor.process_file(self.output_file)
+
+        self.assertIn("File size exceeds limit. Processing aborted", str(context.exception))
+
+        os.remove(large_file)
 
 
 if __name__ == "__main__":
