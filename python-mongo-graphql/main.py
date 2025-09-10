@@ -6,9 +6,6 @@ from strawberry.asgi import GraphQL
 from dotenv import load_dotenv
 import os
 
-# --------------------------
-# Load environment variables
-# --------------------------
 load_dotenv()
 
 MONGO_CONNECTION_URL = os.getenv("MONGO_CONNECTION_URL")
@@ -17,25 +14,16 @@ MONGO_COLLECTION_EMPLOYEES = os.getenv("MONGO_COLLECTION_EMPLOYEES")
 
 app = FastAPI()
 
-# --------------------------
-# MongoDB Connection
-# --------------------------
 client = MongoClient(MONGO_CONNECTION_URL)
 db = client[MONGO_DB_NAME]
 collection = db[MONGO_COLLECTION_EMPLOYEES]
 
-# --------------------------
-# Helper: Auto-increment integer ID
-# --------------------------
 def get_next_id() -> int:
     last_employee = collection.find_one(sort=[("id", -1)])
     if last_employee and "id" in last_employee:
         return last_employee["id"] + 1
     return 1
 
-# --------------------------
-# GraphQL Schema
-# --------------------------
 @strawberry.type
 class Employee:
     id: int
@@ -90,9 +78,16 @@ class Mutation:
             return Employee(id=e["id"], name=e["name"], role=e.get("role", "Staff"))
         return None
 
-# --------------------------
-# Schema + GraphQL Endpoint
-# --------------------------
+    @strawberry.mutation
+    def insert_employees_array(self, employees: List[str], role: str = "Staff") -> List[Employee]:
+        inserted_employees = []
+        for name in employees:
+            new_id = get_next_id()
+            employee_doc = {"id": new_id, "name": name, "role": role}
+            collection.insert_one(employee_doc)
+            inserted_employees.append(Employee(id=new_id, name=name, role=role))
+        return inserted_employees
+
 schema = strawberry.Schema(query=Query, mutation=Mutation)
 app.mount("/graphql", GraphQL(schema))
 
