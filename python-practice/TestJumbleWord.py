@@ -31,7 +31,10 @@ class TestJumbleWord(unittest.TestCase):
 
     def test_large_input(self):
         big_text = " ".join([f"word{i}" for i in range(600)])
+        print(f"Extreme Test: 600-word text: {big_text}")
+        # TODO Implement & use jumble for paragraphs
         jumbled = JumbleWord.jumble(big_text)
+        print(f"Extreme Test: 600-word jumbled: {jumbled}")
         self.assertCountEqual(jumbled, big_text)
         self.assertEqual(len(jumbled), len(big_text))
         print("✅ Extreme Test: 600-word text jumbled successfully")

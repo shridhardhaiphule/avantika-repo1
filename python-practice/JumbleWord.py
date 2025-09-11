@@ -11,3 +11,6 @@ class JumbleWord:
         letters = list(word)
         random.shuffle(letters)
         return ''.join(letters)
+    
+    # TODO Create Method that accepts a paragraph and jumbles each word in it.
+    
