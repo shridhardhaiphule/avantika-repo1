@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from typing import List, Optional
+from typing import List
 from pymongo import MongoClient
 import strawberry
 from strawberry.asgi import GraphQL
@@ -14,15 +14,9 @@ MONGO_COLLECTION_EMPLOYEES = os.getenv("MONGO_COLLECTION_EMPLOYEES")
 
 app = FastAPI()
 
-client = MongoClient(MONGO_CONNECTION_URL)
-db = client[MONGO_DB_NAME]
-collection = db[MONGO_COLLECTION_EMPLOYEES]
-
-def get_next_id() -> int:
-    last_employee = collection.find_one(sort=[("id", -1)])
-    if last_employee and "id" in last_employee:
-        return last_employee["id"] + 1
-    return 1
+client = MongoClient("mongodb://localhost:27017/")
+db = client["CRUD"]
+collection = db["employees"]
 
 @strawberry.type
 class Employee:
@@ -30,67 +24,84 @@ class Employee:
     name: str
     role: str
 
+@strawberry.input
+class EmployeeInput:
+    name: str
+    role: str
+
 @strawberry.type
 class Query:
     @strawberry.field
     def employees(self) -> List[Employee]:
-        return [
-            Employee(id=e["id"], name=e["name"], role=e.get("role", "Staff"))
-            for e in collection.find({"id": {"$exists": True}})
-        ]
+        employees = []
+        for employee_data in collection.find():
+            employees.append(
+                Employee(
+                    id=employee_data["id"],
+                    name=employee_data["name"],
+                    role=employee_data["role"],
+                )
+            )
+        return employees
 
     @strawberry.field
-    def employee(self, id: int) -> Optional[Employee]:
-        e = collection.find_one({"id": id})
-        if e:
-            return Employee(id=e["id"], name=e["name"], role=e.get("role", "Staff"))
+    def employee(self, id: int) -> Employee:
+        employee_data = collection.find_one({"id": id})
+        if employee_data:
+            return Employee(
+                id=employee_data["id"],
+                name=employee_data["name"],
+                role=employee_data["role"],
+            )
         return None
 
 @strawberry.type
 class Mutation:
     @strawberry.mutation
-    def create_employee(self, name: str, role: str = "Staff") -> Employee:
-        new_id = get_next_id()
+    def create_employee(self, name: str, role: str) -> Employee:
+        last_employee = collection.find_one(sort=[("id", -1)])
+        new_id = last_employee["id"] + 1 if last_employee else 1
+
         employee = {"id": new_id, "name": name, "role": role}
         collection.insert_one(employee)
-        return Employee(id=new_id, name=name, role=role)
+        return Employee(id=employee["id"], name=employee["name"], role=employee["role"])
 
     @strawberry.mutation
-    def update_employee(self, id: int, name: Optional[str] = None, role: Optional[str] = None) -> Optional[Employee]:
-        update_data = {}
-        if name:
-            update_data["name"] = name
-        if role:
-            update_data["role"] = role
+    def insert_employees_array_v1(self, employees: List[EmployeeInput]) -> List[Employee]:
+        last_employee = collection.find_one(sort=[("id", -1)])
+        start_id = last_employee["id"] + 1 if last_employee else 1
 
-        if update_data:
-            collection.update_one({"id": id}, {"$set": update_data})
+        # FIXED: now actually builds the list before inserting
+        new_employees = [
+            {"id": start_id + i, "name": emp.name, "role": emp.role}
+            for i, emp in enumerate(employees)
+        ]
 
-        e = collection.find_one({"id": id})
-        if e:
-            return Employee(id=e["id"], name=e["name"], role=e.get("role", "Staff"))
-        return None
+        collection.insert_many(new_employees)
 
-    @strawberry.mutation
-    def delete_employee(self, id: int) -> Optional[Employee]:
-        e = collection.find_one_and_delete({"id": id})
-        if e:
-            return Employee(id=e["id"], name=e["name"], role=e.get("role", "Staff"))
-        return None
+        return [
+            Employee(id=emp["id"], name=emp["name"], role=emp["role"])
+            for emp in new_employees
+        ]
 
     @strawberry.mutation
-    def insert_employees_array(self, employees: List[str], role: str = "Staff") -> List[Employee]:
-        inserted_employees = []
-        for name in employees:
-            new_id = get_next_id()
-            employee_doc = {"id": new_id, "name": name, "role": role}
-            collection.insert_one(employee_doc)
-            inserted_employees.append(Employee(id=new_id, name=name, role=role))
-        return inserted_employees
+    def update_employee(self, id: int, name: str, role: str) -> Employee:
+        collection.update_one({"id": id}, {"$set": {"name": name, "role": role}})
+        updated_employee = collection.find_one({"id": id})
+        return Employee(
+            id=updated_employee["id"],
+            name=updated_employee["name"],
+            role=updated_employee["role"],
+        )
+
+    @strawberry.mutation
+    def delete_employee(self, id: int) -> Employee:
+        deleted_employee = collection.find_one_and_delete({"id": id})
+        return Employee(
+            id=deleted_employee["id"],
+            name=deleted_employee["name"],
+            role=deleted_employee["role"],
+        )
 
 schema = strawberry.Schema(query=Query, mutation=Mutation)
 app.mount("/graphql", GraphQL(schema))
-
-@app.get("/")
-def root():
-    return {"message": "Welcome! Go to /graphql to use GraphQL Playground 🚀"}
