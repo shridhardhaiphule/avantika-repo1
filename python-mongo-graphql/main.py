@@ -3,20 +3,20 @@ from typing import List
 from pymongo import MongoClient
 import strawberry
 from strawberry.asgi import GraphQL
-from dotenv import load_dotenv
 import os
 
-load_dotenv()
+from EnvConstants import EnvConstants
+env = EnvConstants.load_env()
 
-MONGO_CONNECTION_URL = os.getenv("MONGO_CONNECTION_URL")
-MONGO_DB_NAME = os.getenv("MONGO_DB_NAME")
-MONGO_COLLECTION_EMPLOYEES = os.getenv("MONGO_COLLECTION_EMPLOYEES")
+MONGO_CONNECTION_URL = env["MONGO_CONNECTION_URL"]
+MONGO_DB_NAME = env["MONGO_DB_NAME"]
+MONGO_COLLECTION_EMPLOYEES = env["MONGO_COLLECTION_EMPLOYEES"]
 
 app = FastAPI()
 
-client = MongoClient("mongodb://localhost:27017/")
-db = client["CRUD"]
-collection = db["employees"]
+client = MongoClient(MONGO_CONNECTION_URL)
+db = client[MONGO_DB_NAME]
+collection = db[MONGO_COLLECTION_EMPLOYEES]
 
 @strawberry.type
 class Employee:
@@ -71,7 +71,6 @@ class Mutation:
         last_employee = collection.find_one(sort=[("id", -1)])
         start_id = last_employee["id"] + 1 if last_employee else 1
 
-        # FIXED: now actually builds the list before inserting
         new_employees = [
             {"id": start_id + i, "name": emp.name, "role": emp.role}
             for i, emp in enumerate(employees)
