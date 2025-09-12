@@ -6,7 +6,7 @@ class TestJumbleWord(unittest.TestCase):
     def test_jumble_single_word(self):
         word = "hello"
         jumbled = JumbleWord.jumble(word)
-        self.assertCountEqual(jumbled, word)  # letters must match
+        self.assertCountEqual(jumbled, word)
         print(f"✅ Single Word Test: '{word}' -> '{jumbled}'")
 
     def test_non_string_input(self):
@@ -48,8 +48,8 @@ class TestJumbleWord(unittest.TestCase):
         jumbled = JumbleWord.jumble_paragraph(paragraph)
         print(f"Jumbled Paragraph:\n{jumbled}\n")
 
-        self.assertEqual(len(jumbled), len(paragraph))             # length should match
-        self.assertEqual(len(jumbled.split()), len(paragraph.split()))  # word count should match
+        self.assertEqual(len(jumbled), len(paragraph))
+        self.assertEqual(len(jumbled.split()), len(paragraph.split()))
         print("✅ Large Paragraph Test Passed Successfully")
 
     def test_array_input(self):
