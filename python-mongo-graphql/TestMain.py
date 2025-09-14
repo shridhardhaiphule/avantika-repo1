@@ -6,7 +6,7 @@ client = TestClient(app)
 
 def run_query(query: str, variables: dict = None):
     response = client.post("/graphql", json={"query": query, "variables": variables})
-    print("GraphQL Response:", response.json())  # 👈 Always print
+    print("GraphQL Response:", response.json())
     return response.json()
 
 def test_create_employee():
