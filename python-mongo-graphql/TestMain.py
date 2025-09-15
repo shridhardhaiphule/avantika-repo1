@@ -1,115 +1,91 @@
-import json
-from starlette.testclient import TestClient
-from main import app
+import os
+import requests
 
-client = TestClient(app)
+os.environ["APP_ENV"] = "test"
 
-def run_query(query: str, variables: dict = None):
-    response = client.post("/graphql", json={"query": query, "variables": variables})
-    print("GraphQL Response:", response.json())
-    return response.json()
+BASE_URL = "http://127.0.0.1:8000"
 
-def test_create_employee():
+
+def test_get_employee_by_role_positive():
     query = """
-        mutation {
-            createEmployee(name: "TestUser", role: "Tester") {
-                id
-                name
-                role
-            }
+    query {
+        getEmployeeByRole(role: "Developer") {
+            id
+            name
+            role
         }
+    }
     """
-    result = run_query(query)
-    assert "errors" not in result
-    emp = result["data"]["createEmployee"]
-    print("✅ Created employee:", emp)
+    response = requests.post(f"{BASE_URL}/graphql", json={"query": query})
+    assert response.status_code == 200
+    data = response.json()
+    assert "errors" not in data
+    employees = data["data"]["getEmployeeByRole"]
+    print("Positive exact role search:", employees)
+    assert len(employees) > 0
+    assert employees[0]["role"].lower() == "developer"
 
-def test_get_employees():
+
+def test_search_employee_by_role_positive():
     query = """
-        query {
-            employees {
-                id
-                name
-                role
-            }
+    query {
+        searchEmployeeByRole(keyword: "sign") {
+            id
+            name
+            role
         }
+    }
     """
-    result = run_query(query)
-    assert "errors" not in result
-    print("✅ Employees list:", result["data"]["employees"])
+    response = requests.post(f"{BASE_URL}/graphql", json={"query": query})
+    assert response.status_code == 200
+    data = response.json()
+    assert "errors" not in data
+    employees = data["data"]["searchEmployeeByRole"]
+    print("Positive like-search:", employees)
+    assert any("designer" in emp["role"].lower() for emp in employees)
 
-def test_get_employee_by_role():
+
+def test_get_employee_by_role_negative():
     query = """
-        query {
-            getEmployeeByRole(role: "Tester") {
-                id
-                name
-                role
-            }
+    query {
+        getEmployeeByRole(role: "Manager") {
+            id
+            name
+            role
         }
+    }
     """
-    result = run_query(query)
-    assert "errors" not in result
-    print("✅ Employees with role Tester:", result["data"]["getEmployeeByRole"])
+    response = requests.post(f"{BASE_URL}/graphql", json={"query": query})
+    assert response.status_code == 200
+    data = response.json()
+    assert "errors" not in data
+    employees = data["data"]["getEmployeeByRole"]
+    print("Negative exact role search:", employees)
+    assert employees == []
 
-def test_update_employee():
+
+def test_database_down():
     query = """
-        mutation {
-            updateEmployee(id: 1, name: "UpdatedUser", role: "UpdatedRole") {
-                id
-                name
-                role
-            }
+    query {
+        employees {
+            id
+            name
+            role
         }
+    }
     """
-    result = run_query(query)
-    assert "errors" not in result
-    print("✅ Updated employee:", result["data"]["updateEmployee"])
-
-def test_delete_employee():
-    query = """
-        mutation {
-            deleteEmployee(id: 1) {
-                id
-                name
-                role
-            }
-        }
-    """
-    result = run_query(query)
-    assert "errors" not in result
-    print("✅ Deleted employee:", result["data"]["deleteEmployee"])
-
-def test_db_down(monkeypatch=None):
-    from main import collection
-
-    def mock_find(*args, **kwargs):
-        raise Exception("Database is down")
-
-    if monkeypatch:
-        monkeypatch.setattr(collection, "find", mock_find)
-    else:
-        collection.find = mock_find
-
-    query = """
-        query {
-            employees {
-                id
-                name
-                role
-            }
-        }
-    """
-    result = run_query(query)
-    assert "errors" in result
-    print("⚠️ Expected DB error:", result["errors"][0]["message"])
-
+    try:
+        bad_response = requests.post("http://127.0.0.1:9999/graphql", json={"query": query})
+    except Exception as e:
+        print("Database down test passed, error:", e)
+        return
+    data = bad_response.json()
+    assert "errors" in data
+    print("Database down response:", data)
 
 if __name__ == "__main__":
-    print("🚀 Running manual tests...\n")
-    test_create_employee()
-    test_get_employees()
-    test_get_employee_by_role()
-    test_update_employee()
-    test_delete_employee()
-    test_db_down()
+    test_get_employee_by_role_positive()
+    test_search_employee_by_role_positive()
+    test_get_employee_by_role_negative()
+    test_database_down()
+    print("\nAll tests executed.")

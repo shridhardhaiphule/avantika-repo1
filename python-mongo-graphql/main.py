@@ -11,12 +11,14 @@ from strawberry.exceptions import GraphQLError
 
 env = EnvConstants.load_env()
 
+
 def load_env():
     MONGO_CONNECTION_URL = os.getenv("MONGO_CONNECTION_URL")
     MONGO_DB_NAME = os.getenv("MONGO_DB_NAME")
     MONGO_COLLECTION_EMPLOYEES = os.getenv("MONGO_COLLECTION_EMPLOYEES")
 
 app = FastAPI()
+
 client = MongoClient("mongodb://localhost:27017/")
 db = client["CRUD"]
 collection = db["employees"]
@@ -27,16 +29,18 @@ class Employee:
     name: str
     role: str
 
+
 @strawberry.input
 class EmployeeInput:
     name: str
     role: str
 
+
 def to_employee(doc) -> Employee:
     return Employee(
         id=int(doc.get("id", 0)),
-        name=str(doc.get("name", "")),
-        role=str(doc.get("role", ""))
+        name=str(doc.get("name", "")).strip(),
+        role=str(doc.get("role", "")).strip(),
     )
 
 @strawberry.type
@@ -59,7 +63,8 @@ class Query:
     @strawberry.field
     def get_employee_by_role(self, role: str) -> List[Employee]:
         try:
-            query = {"role": {"$regex": f"^{role.strip()}$", "$options": "i"}}
+            cleaned_role = role.strip()
+            query = {"role": {"$regex": f"^{cleaned_role}$", "$options": "i"}}
             return [to_employee(emp) for emp in collection.find(query)]
         except Exception as e:
             raise GraphQLError(f"Database error: {str(e)}")
@@ -67,7 +72,8 @@ class Query:
     @strawberry.field
     def search_employee_by_role(self, keyword: str) -> List[Employee]:
         try:
-            query = {"role": {"$regex": keyword.strip(), "$options": "i"}}
+            cleaned_keyword = keyword.strip()
+            query = {"role": {"$regex": cleaned_keyword, "$options": "i"}}
             return [to_employee(emp) for emp in collection.find(query)]
         except Exception as e:
             raise GraphQLError(f"Database error: {str(e)}")
@@ -79,19 +85,21 @@ class Mutation:
         try:
             last = collection.find_one(sort=[("id", -1)])
             new_id = last["id"] + 1 if last else 1
-            emp = {"id": new_id, "name": name, "role": role}
+            emp = {"id": new_id, "name": name.strip(), "role": role.strip()}
             collection.insert_one(emp)
             return to_employee(emp)
         except Exception as e:
             raise GraphQLError(f"Database error: {str(e)}")
 
     @strawberry.mutation
-    def insert_employees_array_v1(self, employees: List[EmployeeInput]) -> List[Employee]:
+    def insert_employees_array_v1(
+        self, employees: List[EmployeeInput]
+    ) -> List[Employee]:
         try:
             last = collection.find_one(sort=[("id", -1)])
             start_id = last["id"] + 1 if last else 1
             new_emps = [
-                {"id": start_id + i, "name": emp.name, "role": emp.role}
+                {"id": start_id + i, "name": emp.name.strip(), "role": emp.role.strip()}
                 for i, emp in enumerate(employees)
             ]
             collection.insert_many(new_emps)
@@ -105,7 +113,7 @@ class Mutation:
             last = collection.find_one(sort=[("id", -1)])
             start_id = last["id"] + 1 if last else 1
             new_emps = [
-                {"id": start_id + i, "name": emp.name, "role": emp.role}
+                {"id": start_id + i, "name": emp.name.strip(), "role": emp.role.strip()}
                 for i, emp in enumerate(employees)
             ]
             collection.insert_many(new_emps)
@@ -116,7 +124,9 @@ class Mutation:
     @strawberry.mutation
     def update_employee(self, id: int, name: str, role: str) -> Optional[Employee]:
         try:
-            collection.update_one({"id": id}, {"$set": {"name": name, "role": role}})
+            collection.update_one(
+                {"id": id}, {"$set": {"name": name.strip(), "role": role.strip()}}
+            )
             emp = collection.find_one({"id": id})
             return to_employee(emp) if emp else None
         except Exception as e:
@@ -129,6 +139,7 @@ class Mutation:
             return to_employee(emp) if emp else None
         except Exception as e:
             raise GraphQLError(f"Database error: {str(e)}")
+
 
 schema = strawberry.Schema(query=Query, mutation=Mutation)
 app.mount("/graphql", GraphQL(schema))
