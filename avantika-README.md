@@ -81,7 +81,13 @@ print("The sum is:", result)
 
 
 ## 12. Emoji
-:smile: :laughing: :angry: :crying: :hello:
+:smile: :laughing: :angry: :blush: :sunglasses: :thinking: :cry: 
+
+:clap: :point_up: :point_right: :ok_hand:
+
+:cat: :dog: :tiger: :lion: :pande_face:
+
+:fire: :coffee: :star: :pizza:
 
 
 ## 13. Footnotes
