@@ -40,7 +40,7 @@
 
 
 ## 5. Images
-![alt text](https://hub.docker.com/_/python)
+![alt text](https://www.citypng.com/photo/20680/hd-python-logo-symbol-transparent-png)
 
 
 ## 6. Blockquotes
