@@ -20,12 +20,12 @@ pip install -r requirements.txt --upgrade
 
 ```
 
-pip install annotated-types anyio certifi charset-normalizer click colorama dnspython fastapi
+pip install dotenv annotated-types anyio certifi charset-normalizer click colorama dnspython fastapi
 pip install graphql-core h11 httpcore idna iniconfig packaging pluggy
 pip install pydantic pydantic_core pymongo pytest python-dateutil python-multipart requests
 
 pip install six sniffio starlette strawberry-graphql typing_extensions urllib3 uvicorn
-python -m uvicorn main:app --reload
+APP_ENV=test;python -m uvicorn main:app --reload
 
 ```
 
@@ -42,18 +42,37 @@ pip install uvicorn -->
 # Examples
 ## Create Employee
 To create a new employee, send a GraphQL mutation request:
-``` mutation MyMutation {
-createEmployee(name: "Bob", role: "Manager") {
+``` 
+
+mutation MyMutation {
+createEmployee(id: 1, name: "Bob", role: "Manager") {
     id
     name
     role
   }
 }
 ```
+
+## Insert multiple employees using V1 method
+```
+mutation MyMutation {
+  insertEmployeesArrayV1(
+    employees: [
+    "V1 Test Emp1"  , "V1 Test Emp2"
+    ]
+  ) {
+    id
+    name
+    role
+  }
+}
+```
+
 ## Insert multiple employees
 To create multiple employees, send a GraphQL mutation request:
-``` mutation MyMutation {
-insertEmployeesArrayV1(
+```
+ mutation MyMutation {
+insertEmployeesArray(
     employees: [{name: "Tanmay", role: "Software engineer"}, {name: "Prachi", role: "HR"}]
   ) {
     id
@@ -65,7 +84,8 @@ insertEmployeesArrayV1(
 
 ## Get all employees
 To get a list of all employees, send a GraphQL query request:
-``` query MyQuery {
+``` 
+query MyQuery {
 employees {
     id
     name
@@ -76,7 +96,8 @@ employees {
 
 ## Update employee
 To update a employee, send a GraphQL mutation request:
-``` mutation MyMutation {
+``` 
+mutation MyMutation {
 updateEmployee(id: 4, name: "Harry", role: "Graphic designer") {
     id
     name
@@ -87,7 +108,8 @@ updateEmployee(id: 4, name: "Harry", role: "Graphic designer") {
 
 ## Delete employee
 To delete a employee, send a GraphQL mutation request:
-``` mutation MyMutation {
+``` 
+mutation MyMutation {
 deleteEmployee(id: 2) {
     id
     name
@@ -96,8 +118,9 @@ deleteEmployee(id: 2) {
 ```
 ## Get employee by role
 To get a specific employee role, send a GraphQL query request:
-```query MyQuery {
-  getEmployeeByRole(role: "Developer") {
+```
+query MyQuery {
+  getEmployeeByRole(role: "Manager") {
     id
     name
     role
@@ -107,11 +130,26 @@ To get a specific employee role, send a GraphQL query request:
 
 ## Search employee by role
 To search a specific employee role, send a GraphQL query request:
-``` query MyQuery {
-searchEmployeeByRole(keyword: "dev") {
+``` 
+query MyQuery {
+searchEmployeeByRole(keyword: "a") {
     id
     name
     role
   }
 }
+```
+
+
+## .env Setup & Verification
+
+```
+export APP_ENV=test && python3 main.py
+```
+
+
+## .env Setup & Verification
+
+```
+export APP_ENV=test && python3 TestMain.py
 ```

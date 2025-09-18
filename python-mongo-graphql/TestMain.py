@@ -1,22 +1,23 @@
 import os
 import requests
+from EnvConstants import EnvConstants
 
-os.environ["APP_ENV"] = "test"
+env = EnvConstants.load_env()
 
-BASE_URL = "http://127.0.0.1:8000"
+MONGO_CONNECTION_URL = env["MONGO_CONNECTION_URL"]
 
 
 def test_get_employee_by_role_positive():
     query = """
     query {
-        getEmployeeByRole(role: "Developer") {
+        getEmployeeByRole(role: "Manager") {
             id
             name
             role
         }
     }
     """
-    response = requests.post(f"{BASE_URL}/graphql", json={"query": query})
+    response = requests.post(f"{MONGO_CONNECTION_URL}/graphql", json={"query": query})
     assert response.status_code == 200
     data = response.json()
     assert "errors" not in data
@@ -36,7 +37,7 @@ def test_search_employee_by_role_positive():
         }
     }
     """
-    response = requests.post(f"{BASE_URL}/graphql", json={"query": query})
+    response = requests.post(f"{MONGO_CONNECTION_URL}/graphql", json={"query": query})
     assert response.status_code == 200
     data = response.json()
     assert "errors" not in data
@@ -55,7 +56,7 @@ def test_get_employee_by_role_negative():
         }
     }
     """
-    response = requests.post(f"{BASE_URL}/graphql", json={"query": query})
+    response = requests.post(f"{MONGO_CONNECTION_URL}/graphql", json={"query": query})
     assert response.status_code == 200
     data = response.json()
     assert "errors" not in data

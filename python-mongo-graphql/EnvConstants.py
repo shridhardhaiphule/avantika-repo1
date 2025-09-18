@@ -6,7 +6,7 @@ class EnvConstants:
 
     @staticmethod
     def load_env():
-        app_env = os.getenv("APP_ENV", "dev")
+        app_env = os.getenv("APP_ENV", "test")
 
         app_root = os.path.dirname(__file__)
         env_file_name = f".env.{app_env}"
