@@ -14,7 +14,7 @@
 - *Italic text*
 - _Italic text_
 - **Bold text**
-- __Bold text__
+- __Bold__
 - ***Bold + Italic text***
 - ~~Strikethrough~~
 
@@ -40,7 +40,7 @@
 
 
 ## 5. Images
-![alt text](https://www.citypng.com/photo/20680/hd-python-logo-symbol-transparent-png)
+![alt text](https://www.markdownguide.org/assets/images/tux.png)
 
 
 ## 6. Blockquotes
