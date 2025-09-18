@@ -12,7 +12,9 @@
 ## 2. Emphasis
 
 - *Italic text*
+- _Italic text_
 - **Bold text**
+- __Bold text__
 - ***Bold + Italic text***
 - ~~Strikethrough~~
 
@@ -38,7 +40,7 @@
 
 
 ## 5. Images
-![alt text](https://www.markdownguide.org/assets/images/tux.png)
+![alt text](https://hub.docker.com/_/python)
 
 
 ## 6. Blockquotes
@@ -81,11 +83,11 @@ print("The sum is:", result)
 
 
 ## 12. Emoji
-:smile: :laughing: :angry: :blush: :sunglasses: :thinking: :cry: 
+:smile: :laughing: :angry: :blush: :sunglasses: :thinking: :cry:
 
 :clap: :point_up: :point_right: :ok_hand:
 
-:cat: :dog: :tiger: :lion: :pande_face:
+:cat: :dog: :tiger: :lion: :panda_face:
 
 :fire: :coffee: :star: :pizza:
 
