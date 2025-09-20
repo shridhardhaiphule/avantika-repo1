@@ -11,12 +11,6 @@ from strawberry.exceptions import GraphQLError
 
 env = EnvConstants.load_env()
 
-
-def load_env():
-    MONGO_CONNECTION_URL = env["MONGO_CONNECTION_URL"]
-    MONGO_DB_NAME = env["MONGO_DB_NAME"]
-    MONGO_COLLECTION_EMPLOYEES = env["MONGO_COLLECTION_EMPLOYEES"]
-
 app = FastAPI()
 
 client = MongoClient(env["MONGO_CONNECTION_URL"])
@@ -104,16 +98,13 @@ class Mutation:
     @strawberry.mutation
     def insert_employees_array(self, employees: List[EmployeeInput]) -> List[Employee]:
         try:
-            # GEt the latest id from DB
             last = collection.find_one(sort=[("id", -1)])
             start_id = last["id"] + 1 if last else 1
 
-            # Prepare new employees with unique IDs
             new_emps = [
                 {"id": start_id + i, "name": emp.name.strip(), "role": emp.role.strip()}
                 for i, emp in enumerate(employees)
             ]
-            # INSERT BULK / MANY
             collection.insert_many(new_emps)
             return [to_employee(e) for e in new_emps]
         except Exception as e:
