@@ -13,7 +13,7 @@ Ushas                 NSDL      LONG TERM PORTFOLIO STOCK NSDL AT 920 TARGET 110
 Ushas                 CCCL      Ushas PENNY STOCK CCCL 25, SL: 22, T1:35, T2:40 Entered   Sharekhan
 ```
 
-**Output**(Output_Jumbled.tsv)
+**Output**(output_jumbled.tsv)
 ```
 generic_common_keys   ticker    notes     status    securities_name
 Ussha	              DLNS	    OLGN RETM ROIPLFOOT OKSCT DLNS TA 029 RTGAET 0001100,135,01+ OTPS LSSO TA 070 CLSNOGI SBSAI
@@ -21,7 +21,7 @@ sahsU              	  CCLC	    Uhssa EPNNY KTOSC CCLC 52, LS: 22, 31:5T, 0:2T4 D
 ```
 
 
-**Output**(Output.JSON)
+**Output**(output.json)
 ```
 [
   {
