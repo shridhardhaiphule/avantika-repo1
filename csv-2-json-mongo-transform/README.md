@@ -1,5 +1,8 @@
 # Data PRocessing
 
-## CSV/TSV Read 
+## CSV/TSV Read
 
-## TSV to 
+## TSV to
+
+## run the test
+python -m unittest TestDataProcessor.py -v
