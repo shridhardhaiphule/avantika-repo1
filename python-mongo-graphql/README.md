@@ -154,17 +154,16 @@ export APP_ENV=test && python3 main.py
 export APP_ENV=test && python3 TestMain.py
 ```
 
-# Commands
+# Run tests
 ```
+cd python-mongo-graphql
+
 set APP_ENV=test
-python TestMain.py
 uvicorn main:app --reload
 
 set APP_ENV=dev
-python TestMain.py
 uvicorn main:app --reload
 
 set APP_ENV=production
-python TestMain.py
 uvicorn main:app --reload
 ```
