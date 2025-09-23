@@ -21,13 +21,22 @@ class NotificationDAO:
 
     # --- Mutations (Write Operations) ---
 
-    def create_notification(self, user_id, category, sub_category, item):
+    def create_notification(self, user_id, category, sub_category,title,
+                            message_body=None,icon_url=None,action_url=None,
+                            condition_trigger=None,status="unread",priority="normal",expire_at=None):
         """Creates a single new notification."""
         doc = {
             'user_id': user_id,
             'category': category,
             'sub_category': sub_category,
-            'item': item,
+            'title': title,
+            'message_body':message_body,
+            'icon_url':icon_url,
+            'action_url':action_url,
+            'condition_trigger':condition_trigger,
+            'status':status,
+            'priority':priority,
+            'expire_at':expire_at,
             'is_read': False,
             'created_at': datetime.now(timezone.utc),
             'updated_at': datetime.now(timezone.utc),
@@ -35,40 +44,48 @@ class NotificationDAO:
         }
         return self.collection.insert_one(doc).inserted_id
 
-    def create_notifications(self, user_id, category, sub_category, item_array):
-        """Creates multiple notifications from an array of items."""
+    def create_notifications(self, user_id, category, sub_category, title_array,
+                             status="unread",priority="normal"):
+        """Creates multiple notifications from an array of titles."""
         docs = [
             {
                 'user_id': user_id,
                 'category': category,
                 'sub_category': sub_category,
-                'item': item,
+                'title': title,
+                'message_body':title.get("message_body"),
+                'icon_url':title.get("icon_url"),
+                'action_url':title.get("action_url"),
+                'condition_trigger':title.get("condition_trigger"),
+                'status':status,
+                'priority':priority,
+                'expire_at':title.get("expire_at"),
                 'is_read': False,
                 'created_at': datetime.now(timezone.utc),
                 'updated_at': datetime.now(timezone.utc),
                 'deleted_at': None
             }
-            for item in item_array
+            for title in title_array
         ]
         if not docs:
             return []
         return self.collection.insert_many(docs).inserted_ids
 
-    def update_notification(self, notification_id, category=None, sub_category=None, item=None, status=None):
+    def update_notification(self, notification_id, **kwargs):
         """
-        Updates a notification's fields.
-        :param notification_id: The ObjectId of the notification to update.
-        :param new_data: A dictionary of fields to update, e.g., {'is_read': True}.
+        Updates a notification's fields dynamically.
+        Example: update_notification(id, title="New Title", status="read")
         """
         update_fields = {'updated_at': datetime.now(timezone.utc)}
-        if category is not None:
-            update_fields['category'] = category
-        if sub_category is not None:
-            update_fields['sub_category'] = sub_category
-        if item is not None:
-            update_fields['item'] = item
-        if status is not None:
-            update_fields['is_read'] = status
+        # Only include keys that match our schema
+        valid_fields = [
+            'category', 'sub_category', 'title', 'message_body',
+            'icon_url', 'action_url', 'condition_trigger', 'status',
+            'priority', 'expired_at', 'is_read'
+        ]
+        for field, value in kwargs.items():
+            if field in valid_fields and value is not None:
+                update_fields[field] = value
         
         result = self.collection.update_one(
             {'_id': ObjectId(notification_id)},
@@ -122,51 +139,68 @@ class NotificationDAO:
             return None
 
 
-# --- Main script to connect and populate data ---
-# if __name__ == "__main__":
-#     # Define your connection string and database name
 
-#     CONNECTION_STRING = "mongodb://localhost:27017/"
-#     DATABASE_NAME = "dental_tourism"
+if __name__ == "__main__":
+    # Define your connection string and database name
 
-#     try:
-#         # Establish a connection to the MongoDB client
-#         client = pymongo.MongoClient(CONNECTION_STRING)
-#         # Select the database
-#         db = client[DATABASE_NAME]
-        
-#         print(f"Successfully connected to the database: '{DATABASE_NAME}'")
-        
-#         # Instantiate the NotificationDAO class with the database connection
-#         notification_manager = NotificationDAO(db)
-        
-#         # Define the user ID for our example data
-#         user_id = "us_patient_123"
+    CONNECTION_STRING = "mongodb://localhost:27017/"
+    DATABASE_NAME = "dental_tourism"
 
-#         # --- Populate the database with sample notifications ---
+    try:
+        # Establish a connection to the MongoDB client
+        client = pymongo.MongoClient(CONNECTION_STRING)
+        # Select the database
+        db = client[DATABASE_NAME]
         
-#         print("\n--- Populating a single notification ---")
-#         notification_id = notification_manager.create_notification(
-#             user_id, "account", "login", {"message": "New device login detected from New York, USA."}
-#         )
-#         print(f"Created a new notification with ID: {notification_id}")
+        print(f"Successfully connected to the database: '{DATABASE_NAME}'")
+        
+        # Instantiate the NotificationDAO class with the database connection
+        notification_manager = NotificationDAO(db)
+        
+        # Define the user ID for our example data
+        user_id = "us_patient_123"
 
-#         print("\n--- Populating multiple notifications ---")
-#         item_array = [
-#             {"message": "Your booking for May 15th has been confirmed."},
-#             {"message": "A reminder for your appointment on May 20th."}
-#         ]
+        # --- Populate the database with sample notifications ---
         
-#         notification_ids = notification_manager.create_notifications(
-#             user_id, "appointments", "booking_alert", item_array
-#         )
-#         print(f"Created {len(notification_ids)} new notifications.")
+        print("\n--- Populating a single notification ---")
+        notification_id = notification_manager.create_notification(
+            user_id,
+            "account",
+            "login",
+            "New device login detected",
+            message_body= "New device login detected from New York, USA.",
+            icon_url="https://example.com/icon.png",
+            action_url="https://example.com/security",
+            condition_trigger="new_login",
+            status="unread",
+            priority="high"
+        )
+        print(f"Created a new notification with ID: {notification_id}")
+
+        print("\n--- Populating multiple notifications ---")
+        title_array = [
+            {
+                "title": "Booking Confirmed",
+                "message_body": "Your booking for May 15th has been confirmed.",
+                "expired_at": datetime(2025, 5, 16, tzinfo=timezone.utc)
+            },
+            {
+                "title": "Appointment Reminder",
+                "message_body": "Reminder: appointment on May 20th.",
+                "expired_at": datetime(2025, 5, 21, tzinfo=timezone.utc)
+            }
+        ]
         
-#         print("\nData population complete. You can now view this data in MongoDB Compass!")
+        notification_ids = notification_manager.create_notifications(
+            user_id, "appointments", "booking_alert", title_array
+        )
+        print(f"Created {len(notification_ids)} new notifications.")
         
-#     except pymongo.errors.ConnectionFailure as e:
-#         print(f"Connection failed: {e}")
-#         print("Please make sure your MongoDB instance is running and your connection string is correct.")
-#     finally:
-#         if 'client' in locals():
-#             client.close()
+        print("\nData population complete. You can now view this data in MongoDB Compass!")
+        
+    except pymongo.errors.ConnectionFailure as e:
+        print(f"Connection failed: {e}")
+        print("Please make sure your MongoDB instance is running and your connection string is correct.")
+    finally:
+        if 'client' in locals():
+            client.close()
