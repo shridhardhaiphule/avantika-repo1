@@ -123,50 +123,50 @@ class NotificationDAO:
 
 
 # --- Main script to connect and populate data ---
-if __name__ == "__main__":
-    # Define your connection string and database name
-    # Replace this with your actual connection string if you're not using localhost
-    CONNECTION_STRING = "mongodb://localhost:27017/"  
-    DATABASE_NAME = "dental_tourism"
+# if __name__ == "__main__":
+#     # Define your connection string and database name
 
-    try:
-        # Establish a connection to the MongoDB client
-        client = pymongo.MongoClient(CONNECTION_STRING)
-        # Select the database
-        db = client[DATABASE_NAME]
-        
-        print(f"Successfully connected to the database: '{DATABASE_NAME}'")
-        
-        # Instantiate the NotificationDAO class with the database connection
-        notification_manager = NotificationDAO(db)
-        
-        # Define the user ID for our example data
-        user_id = "us_patient_123"
+#     CONNECTION_STRING = "mongodb://localhost:27017/"
+#     DATABASE_NAME = "dental_tourism"
 
-        # --- Populate the database with sample notifications ---
+#     try:
+#         # Establish a connection to the MongoDB client
+#         client = pymongo.MongoClient(CONNECTION_STRING)
+#         # Select the database
+#         db = client[DATABASE_NAME]
         
-        print("\n--- Populating a single notification ---")
-        notification_id = notification_manager.create_notification(
-            user_id, "account", "login", {"message": "New device login detected from New York, USA."}
-        )
-        print(f"Created a new notification with ID: {notification_id}")
+#         print(f"Successfully connected to the database: '{DATABASE_NAME}'")
+        
+#         # Instantiate the NotificationDAO class with the database connection
+#         notification_manager = NotificationDAO(db)
+        
+#         # Define the user ID for our example data
+#         user_id = "us_patient_123"
 
-        print("\n--- Populating multiple notifications ---")
-        item_array = [
-            {"message": "Your booking for May 15th has been confirmed."},
-            {"message": "A reminder for your appointment on May 20th."}
-        ]
+#         # --- Populate the database with sample notifications ---
         
-        notification_ids = notification_manager.create_notifications(
-            user_id, "appointments", "booking_alert", item_array
-        )
-        print(f"Created {len(notification_ids)} new notifications.")
+#         print("\n--- Populating a single notification ---")
+#         notification_id = notification_manager.create_notification(
+#             user_id, "account", "login", {"message": "New device login detected from New York, USA."}
+#         )
+#         print(f"Created a new notification with ID: {notification_id}")
+
+#         print("\n--- Populating multiple notifications ---")
+#         item_array = [
+#             {"message": "Your booking for May 15th has been confirmed."},
+#             {"message": "A reminder for your appointment on May 20th."}
+#         ]
         
-        print("\nData population complete. You can now view this data in MongoDB Compass!")
+#         notification_ids = notification_manager.create_notifications(
+#             user_id, "appointments", "booking_alert", item_array
+#         )
+#         print(f"Created {len(notification_ids)} new notifications.")
         
-    except pymongo.errors.ConnectionFailure as e:
-        print(f"Connection failed: {e}")
-        print("Please make sure your MongoDB instance is running and your connection string is correct.")
-    finally:
-        if 'client' in locals():
-            client.close()
+#         print("\nData population complete. You can now view this data in MongoDB Compass!")
+        
+#     except pymongo.errors.ConnectionFailure as e:
+#         print(f"Connection failed: {e}")
+#         print("Please make sure your MongoDB instance is running and your connection string is correct.")
+#     finally:
+#         if 'client' in locals():
+#             client.close()
