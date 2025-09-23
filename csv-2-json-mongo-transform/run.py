@@ -4,8 +4,8 @@ from DataProcessor import DataProcessor
 def main():
     processor = DataProcessor()
 
-    data_folder = "processed_data"
-    input_file = os.path.join(data_folder, "input.tsv")
+    data_folder = "data"
+    input_file = os.path.join(data_folder, "csv-2-json-mongo-transform-input.tsv")
     output_file = os.path.join(data_folder, "output.json")
 
     data = processor.file_read(input_file)
@@ -23,7 +23,7 @@ def main():
     os.makedirs(data_folder, exist_ok=True)
     with open(output_file, "w", encoding="utf-8") as f:
         f.write(json_data)
-    print(f"✅ JSON saved to '{output_file}'")
+    print("JSON saved to", output_file)
 
     processor.mongoManyInsert(data, "stock_data")
 

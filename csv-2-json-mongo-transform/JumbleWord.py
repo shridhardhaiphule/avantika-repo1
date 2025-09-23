@@ -8,10 +8,16 @@ class JumbleWord:
             raise TypeError("Input must be a string")
         if not word.strip():
             raise ValueError("Input string cannot be empty")
+        if len(word) <= 1:
+            return word
 
         letters = list(word)
-        random.shuffle(letters)
-        return ''.join(letters)
+        shuffled = letters[:]
+        attempt = 0
+        while shuffled == letters and attempt < 10:
+            random.shuffle(shuffled)
+            attempt += 1
+        return ''.join(shuffled)
 
     @staticmethod
     def jumble_paragraph(text):
@@ -32,14 +38,12 @@ class JumbleWord:
                 punctuation = ''
 
             jumbled_word = JumbleWord.jumble(core_word)
-
             jumbled_words.append(jumbled_word + punctuation)
 
         return ' '.join(jumbled_words)
 
     @staticmethod
     def jumble_array(arr):
-    
         if not isinstance(arr, list):
             raise TypeError("Input must be a list")
         
