@@ -2,7 +2,7 @@
 { "order":1,
 "short_name":"IND",
 "long_name":"India",
-"isd_code":"+91"
+"isd_code":"+91",
 "active":"true"
 }
 ]
