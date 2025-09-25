@@ -43,7 +43,7 @@ class Mutation:
             "name": name,
             "age": age,
             "email": email,
-            "created_at": datetime.utcnow().isoformat()
+            "created_at": datetime.now().isoformat()
         }
         inserted = collection.insert_one(doc)
         doc["_id"] = str(inserted.inserted_id)
