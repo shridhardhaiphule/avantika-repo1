@@ -3,6 +3,18 @@
 ## Run tests
 ```
 cd argo-demo-project
+## GraphQL Setup
+
+```
+
+pip install uuid dotenv annotated-types anyio certifi charset-normalizer click colorama dnspython fastapi
+pip install graphql-core h11 httpcore idna iniconfig packaging pluggy
+pip install pydantic pydantic_core pymongo pytest python-dateutil python-multipart requests
+
+pip install six sniffio starlette strawberry-graphql typing_extensions urllib3 uvicorn
+APP_ENV=test;python -m uvicorn NotificationDAO:app --reload
+
+
 python -m unittest TestNotificationDAO.py -v
 ```
 

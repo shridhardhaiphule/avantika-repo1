@@ -5,6 +5,9 @@ from typing import List, Optional
 import strawberry
 from strawberry.asgi import GraphQL
 from strawberry.exceptions import GraphQLError
+import uuid
+
+
 
 class NotificationDAO:
     def __init__(self, db_name="argo_demo", collection_name="notifications", mongo_url="mongodb://localhost:27017/"):
@@ -13,7 +16,7 @@ class NotificationDAO:
         self.collection = self.db[collection_name]
 
     def create_notification(self, user_id, category, sub_category, item):
-        now = datetime.utcnow()
+        now = datetime.now()
         notification = {
             "user_id": user_id,
             "category": category,
@@ -29,9 +32,13 @@ class NotificationDAO:
         return notification
 
     def create_notifications(self, user_id, category, sub_category, item_list):
+
         notifications = []
+
         for item in item_list:
-            n = self.create_notification(user_id, category, sub_category, item)
+            # Generate a Version 4 UUID
+            uuidLoop = str(uuid.uuid4())
+            n = self.create_notification(uuidLoop, category, sub_category, item)
             notifications.append(n)
         return notifications
 
@@ -42,12 +49,12 @@ class NotificationDAO:
         if item: update_fields["item"] = item
         if is_read is not None: update_fields["is_read"] = is_read
         if update_fields:
-            update_fields["updated_at"] = datetime.utcnow()
+            update_fields["updated_at"] = datetime.now()
             self.collection.update_one({"_id": notification_id}, {"$set": update_fields})
         return self.collection.find_one({"_id": notification_id})
 
     def get_unread_user_notifications(self, user_id):
-        return list(self.collection.find({"user_id": user_id, "is_read": False}))
+        return list(self.collection.find({"is_read": False}))
 
     def get_last_read_user_notification(self, user_id):
         return list(self.collection.find({"user_id": user_id, "is_read": True}).sort("updated_at", -1).limit(1))
@@ -77,7 +84,7 @@ dao = NotificationDAO()
 @strawberry.type
 class Notification:
     id: str
-    user_id: int
+    user_id: str
     category: str
     sub_category: str
     item: str
