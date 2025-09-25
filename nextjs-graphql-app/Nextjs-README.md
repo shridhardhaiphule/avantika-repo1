@@ -25,21 +25,13 @@ Split array: [ 'apple', 'banana', 'cherry' ]
 Original Word: practice
 Jumbled Word: cpiretca
 ```
-
-## 2. Create a project using Next.js(Change basic template)
-- Added a welcome message and clickable button on the page
-- Run in terminal
-```bash
-cd nextjs-graphql-app
-npm run dev
-```
 **View page:** [http://localhost:3000/welcomepage](http://localhost:3000/welcomepage)
 
 
 ## 3. Next.js setup
 ```bash
-npx create-next-app@latest nextjs-graphql-app
-cd nextjs-graphql-app
+npx create-next-app@latest nextjs-app
+cd nextjs-app
 npm install graphql express-graphql mongodb
 npm run dev
 ```
@@ -47,6 +39,13 @@ npm run dev
 
 **View page:** [http://localhost:3000/api/graphql](http://localhost:3000/api/graphql)
 
+## 2. Create a project using Next.js(Change basic template)
+- Added a welcome message and clickable button on the page
+- Run in terminal
+```bash
+cd nextjs-app
+npm run dev
+```
 
 ## 4. Example
 - Create a new user
