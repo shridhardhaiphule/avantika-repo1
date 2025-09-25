@@ -14,6 +14,7 @@ class JumbleWord:
         letters = list(word)
         shuffled = letters[:]
         attempt = 0
+        # TODO This logic can be improved using recursion
         while shuffled == letters and attempt < 10:
             random.shuffle(shuffled)
             attempt += 1
