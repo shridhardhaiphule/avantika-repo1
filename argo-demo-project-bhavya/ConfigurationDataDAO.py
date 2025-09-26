@@ -1,73 +1,64 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Sep 25 16:47:22 2025
+Created on Fri Sep 26 11:23:56 2025
 
 @author: Lenovo
 """
-# import csv
-# import json
-# class DataProcessor:
-#     def file_read(self,filepath):
-#         if filepath.endswith(".csv"):
-#             delimiter=","
-#         else:
-#             raise ValueError("only csv files are supported")
-#         try:
-#             with open(filepath,"r",encoding='utf-8') as f:
-#                 reader=csv.DictReader(f, delimiter=delimiter)
-#                 data=[row for row in reader]
-#             print("Read",len(data),"rows from {filepath}")
-#             return data
-#         except FileNotFoundError:
-#             print(f"File not found:{filepath}")
-#             return []
-#     def csv2Json(self,data):
-#         return json.dumps(data,indent=2,ensure_ascii=False)
+
+# graphql_manager.py - Single file containing all classes and execution logic.
+
 import pymongo
 import os
+import json 
+import sys
 import csv
-import json
+from pathlib import Path
 from datetime import datetime, timezone
 from bson.objectid import ObjectId
 
-# NOTE: In a real application, you would import the DAO and Processor
-# from their respective files (e.g., from configuration_dao import ConfigurationDataDAO).
-# For this script, we assume the DAO is defined or available in the scope
-# (or we would paste it here for a self-contained file, as shown below).
+# --- FILE PATHS (Assumed to exist in the current directory) ---
+CSV_FILE_PATH = "Agro_trident_data.csv"
+JSON_FILE_PATH = "countries.json" 
+CONNECTION_STRING = "mongodb://localhost:27017/"
+DATABASE_NAME = "argo_data_db1"
 
-# --- DataProcessor Class (Placeholder/Import) ---
-# Assuming DataProcessor is defined as in the previous response.
-class DataProcessor:
-    def file_read(self, filepath):
-        if not filepath.endswith(".csv"):
-            raise ValueError("Only CSV files are supported")
-        try:
-            with open(filepath, "r", encoding='utf-8') as f:
-                reader = csv.DictReader(f)
-                # Simple cleanup to remove empty rows
-                data = [row for row in reader if any(row.values())] 
-            return data
-        except FileNotFoundError:
-            return []
-    
-    def csv2Json(self, data):
-        return json.dumps(data, indent=2, ensure_ascii=False)
 
-# --- ConfigurationDataDAO Class (Placeholder/Import) ---
-# Assuming ConfigurationDataDAO is defined as in the previous response.
+# PATH SETUP FOR CROSS-DIRECTORY DataProcessor
+# This runs first and is CRUCIAL for importing the external module.
+CURRENT_DIR = Path(__file__).resolve().parent
+REPO_ROOT = CURRENT_DIR.parent 
+# External directory where the file DataProcessor.py is located
+DATA_PROCESSOR_DIR = REPO_ROOT / "csv-2-json-mongo-transform"
+
+if str(DATA_PROCESSOR_DIR) not in sys.path:
+    sys.path.append(str(DATA_PROCESSOR_DIR))
+    print(f"[Setup] Added external path to sys.path: {DATA_PROCESSOR_DIR}")
+
+# 1. ConfigurationDataDAO Class (Data Access Layer)
 class ConfigurationDataDAO:
+    """Data Access Object for configuration_data and related collections."""
+    
     def __init__(self, db):
-        self.collection = db['configuration_data']
+        self.config_collection = db['configuration_data']
+        
 
-    def create_multiple_configuration_data(self, config_list):
+        try:
+            # This calls the code in C:\KoolNano\workspace\avantika-repo1\csv-2-json-mongo-transform\DataProcessor.py
+            from DataProcessor import DataProcessor as ExternalDataProcessor
+            self.processor = ExternalDataProcessor()
+            print("Successfully linked to external DataProcessor for CSV methods.")
+        except ImportError as e:
+            raise ImportError(f"FATAL: Could not import DataProcessor from {DATA_PROCESSOR_DIR}. "
+                              f"Ensure the file is named 'DataProcessor.py' (Title Case) and the class name inside is 'DataProcessor'. Error: {e}")
+
+    def _prepare_config_docs(self, config_list):
+        """Internal helper to clean and timestamp configuration_data records."""
         docs_to_insert = []
         now_utc = datetime.now(timezone.utc)
         
         for doc in config_list:
             cleaned_doc = {k: v for k, v in doc.items() if v is not None and v != ''}
-            
-            # Type conversion for is_active
-            is_active_str = cleaned_doc.get('is_active', 'TRUE').upper()
+            is_active_str = str(cleaned_doc.get('is_active', 'TRUE')).upper()
             cleaned_doc['is_active'] = is_active_str == 'TRUE'
 
             cleaned_doc.update({
@@ -76,96 +67,135 @@ class ConfigurationDataDAO:
                 'deleted_at': None
             })
             docs_to_insert.append(cleaned_doc)
+        return docs_to_insert
 
-        if not docs_to_insert:
+
+    # --- Mutation: CSV Read, Convert, and Insert ---
+    def create_config_data_from_csv(self, filepath):
+        """Reads CSV using external DataProcessor.file_read, converts, and inserts."""
+        
+        data_list = self.processor.file_read(filepath)
+        if not data_list: return []
+
+        # Requirement: Use external DataProcessor.csv2Json 
+        json_output = self.processor.csv2Json(data_list)
+        print(f" CSV data converted to JSON string (length: {len(json_output)}).")
+
+        docs_to_insert = self._prepare_config_docs(data_list)
+        
+        print(f"Inserting {len(docs_to_insert)} records into 'configuration_data'.")
+        return self.config_collection.insert_many(docs_to_insert).inserted_ids
+    
+    
+    # --- Mutation: Read JSON and Insert (Implemented internally as json_read is unavailable) ---
+    def create_countries_data_from_json(self, filepath, collection_name="countries"):
+        """Reads the 'countries.json' file internally and inserts data."""
+        
+        # Internal JSON reading logic (due to external method unavailability)
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                config_list = json.load(f)
+            print(f"Read {len(config_list)} records from JSON file: {filepath} (Internal).")
+        except FileNotFoundError:
+            print(f"JSON File not found: {filepath}")
             return []
         
-        return self.collection.insert_many(docs_to_insert).inserted_ids
-    
-# --- GraphQLManager Class ---
+        if not config_list: return []
+        
+        now_utc = datetime.now(timezone.utc)
+        docs_to_insert = []
+        for doc in config_list:
+            doc.update({'created_at': now_utc})
+            docs_to_insert.append(doc)
+
+        target_collection = self.config_collection.database[collection_name]
+        print(f"Inserting {len(docs_to_insert)} records into '{collection_name}'.")
+        return target_collection.insert_many(docs_to_insert).inserted_ids
+
+
+    # --- Query (similar to search_by_category) ---
+    def search_by_category(self, category_name):
+        """Retrieves all active configuration items for a given category."""
+        print(f"Searching by category: {category_name}")
+        return list(self.config_collection.find({
+            'category': category_name, 
+            'deleted_at': None
+        }).sort('created_at', pymongo.DESCENDING))
+    def search_by_category_subcategory(self, category_name, sub_category_name):
+        """Retrieves active configuration items for a given category and sub-category."""
+        return list(self.config_collection.find({
+            'category': category_name, 
+            'sub_category': sub_category_name,
+            'deleted_at': None
+        }).sort('created_at', pymongo.DESCENDING))
+
+
+# 3. GraphQLManager Class (Orchestration Layer)
 
 class GraphQLManager:
-    """
-    Manages the application's connection to MongoDB and coordinates 
-    data operations for GraphQL mutations/queries (simulated here).
-    """
+    """Manages the MongoDB connection and orchestrates DAO operations."""
+    
     def __init__(self, connection_string, database_name):
         self.connection_string = connection_string
         self.database_name = database_name
         self.client = None
         self.db = None
+        self.config_dao = None
         
     def __enter__(self):
-        """Establishes the MongoDB connection when entering a 'with' block."""
         try:
             self.client = pymongo.MongoClient(self.connection_string)
             self.db = self.client[self.database_name]
-            # Initialize DAO layer
             self.config_dao = ConfigurationDataDAO(self.db)
             return self
         except pymongo.errors.ConnectionFailure as e:
-            print(f"ERROR: Failed to connect to MongoDB: {e}")
+            print(f"[Manager] ERROR: Failed to connect to MongoDB: {e}")
             raise
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        """Closes the MongoDB connection when exiting a 'with' block."""
         if self.client:
             self.client.close()
-            # print("MongoDB connection closed by GraphQLManager.")
 
-    def bulk_insert_config_data(self, filepath):
-        """
-        Reads configuration data from a CSV and performs a bulk insert 
-        into the MongoDB 'configuration_data' collection.
-        
-        This method simulates a GraphQL mutation that triggers data ingestion.
-        """
-        print(f"\n[GraphQLManager] Starting bulk insert process for: {filepath}")
-        
-        processor = DataProcessor()
-        
-        # 1. Read the CSV file
-        config_list = processor.file_read(filepath)
-        
-        if not config_list:
-            print("[GraphQLManager] No data read. Insertion skipped.")
-            return []
+    def insert_csv(self, filepath):
+        """Orchestrates CSV ingestion via DAO."""
+        return self.config_dao.create_config_data_from_csv(filepath)
 
-        # 2. Perform the bulk insert using the DAO
-        inserted_ids = self.config_dao.create_multiple_configuration_data(config_list)
-        
-        print(f"[GraphQLManager] Successfully inserted {len(inserted_ids)} records.")
-        return inserted_ids
+    def insert_countries_json(self, filepath):
+        """Orchestrates JSON ingestion via DAO."""
+        return self.config_dao.create_countries_data_from_json(filepath)
 
-# --- Execution Example ---
+
+# 4. Execution Block
 
 if __name__ == "__main__":
-    # Configuration details
-    CONNECTION_STRING = "mongodb://localhost:27017/"
-    DATABASE_NAME = "dental_tourism"
-    CSV_FILE_PATH = "Argo_Trident_Dental_Config_Combined.csv" 
     
-    # ⚠️ Check if the CSV file exists before running the manager
+    # Final checks before running
     if not os.path.exists(CSV_FILE_PATH):
-        print(f"Error: CSV file '{CSV_FILE_PATH}' not found in the current directory.")
-        print("Please ensure the file is present to run the bulk insert test.")
-    else:
-        print("--- Testing GraphQLManager Bulk Insert Mutation ---")
-        
-        # Use the GraphQLManager in a 'with' block to ensure connection is closed
-        try:
-            with GraphQLManager(CONNECTION_STRING, DATABASE_NAME) as manager:
-                
-                # OPTIONAL: Clear the collection first for a clean test
-                # manager.config_dao.collection.delete_many({}) 
-                # print("Collection cleared for a fresh run.")
-                
-                inserted_ids = manager.bulk_insert_config_data(CSV_FILE_PATH)
-                
-                if inserted_ids:
-                    print(f"\nMutation Successful. Example ID: {inserted_ids[0]}")
-                else:
-                    print("\nMutation completed, but no records were inserted.")
-                    
-        except pymongo.errors.ConnectionFailure:
-            print("\nTest failed due to MongoDB connection issue.")
+        print(f"\n[FATAL] CSV file '{CSV_FILE_PATH}' not found in the current directory.")
+        sys.exit(1)
+    if not os.path.exists(JSON_FILE_PATH):
+        print(f"\n[FATAL] JSON file '{JSON_FILE_PATH}' not found in the current directory.")
+        sys.exit(1)
+    
+    try:
+        print("\n--- Starting MongoDB Connection and Data Ingestion ---")
+        with GraphQLManager(CONNECTION_STRING, DATABASE_NAME) as manager:
+            # Clear collections for a clean run
+            manager.config_dao.config_collection.delete_many({}) 
+            manager.db['countries'].delete_many({})
+            print("[Manager] Cleared configuration_data and countries collections.")
+            
+            # 1. Execute CSV Ingestion (Uses external DataProcessor)
+            inserted_ids_csv = manager.insert_csv(CSV_FILE_PATH)
+            print(f"CSV Insert Successful. Total inserted into 'configuration_data': {len(inserted_ids_csv)}")
+
+            # 2. Execute JSON Ingestion (Uses internal logic)
+            inserted_ids_json = manager.insert_countries_json(JSON_FILE_PATH)
+            print(f"JSON Insert Successful. Total inserted into 'countries': {len(inserted_ids_json)}")
+
+
+    except Exception as e:
+        print(f"\n[ERROR] An unexpected error occurred: {e}")
+            
+    finally:
+        print("\n--- Execution Finished ---")
