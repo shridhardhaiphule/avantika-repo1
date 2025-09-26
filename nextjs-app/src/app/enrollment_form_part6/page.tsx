@@ -94,15 +94,8 @@ class EnrollmentFormPart6 extends React.Component<Record<string, never>, Enrollm
     
     console.log("Complete enrollment application data:", completeFormData);
     
-    // Clear all session storage data after successful submission
-    sessionStorage.removeItem('enrollmentFormPart1');
-    sessionStorage.removeItem('enrollmentFormPart2');
-    sessionStorage.removeItem('enrollmentFormPart3');
-    sessionStorage.removeItem('enrollmentFormPart4');
-    sessionStorage.removeItem('enrollmentFormPart5');
-    sessionStorage.removeItem('enrollmentFormPart6');
-    
-    alert("Application submitted successfully! Thank you for your comprehensive dental clinic enrollment application. We will review your information and contact you soon.");
+    // Navigate to thank you page (session storage will be cleared there)
+    window.location.href = '/thank-you';
   };
 
   render() {
