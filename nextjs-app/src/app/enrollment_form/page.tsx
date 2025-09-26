@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import Image from "next/image";
 import CountryDateTime from "../components/CountryDateTime";
 import Course from "../components/Course";
+import Countries from "../components/Countries";
+
 
 interface EnrollmentFormState {
   formData: {
@@ -12,6 +14,7 @@ interface EnrollmentFormState {
     phone: string;
     course: string;
     comments: string;
+    country: string;
   };
 }
 
@@ -25,7 +28,8 @@ export default class EnrollmentForm extends Component<object, EnrollmentFormStat
         email: "",
         phone: "",
         course: "ui-ux-design",
-        comments: ""
+        comments: "",
+        country: "India"
       }
     };
   }
@@ -48,6 +52,15 @@ export default class EnrollmentForm extends Component<object, EnrollmentFormStat
       }
     }));
   };
+
+  handleCountryChange = (countryValue: string) => {
+    this.setState(prevState => ({
+      formData: {
+        ...prevState.formData,
+        country: countryValue
+      }
+    }));
+  }
 
   handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -154,6 +167,17 @@ export default class EnrollmentForm extends Component<object, EnrollmentFormStat
               onChange={this.handleCourseChange}
               required={true}
             />
+
+            {/* Countries Component */}
+            <div>
+              <label htmlFor="Country" className="block text-sm font-medium text-gray-700 mb-2">
+                Select Country *
+              </label>
+              <Countries
+                selectedCountry={formData.country}
+                onCountryChange={this.handleCountryChange}
+              />
+            </div>
 
             <div>
               <label htmlFor="comments" className="block text-sm font-medium text-gray-700 mb-2">
