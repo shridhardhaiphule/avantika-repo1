@@ -1,0 +1,1745 @@
+[
+    {
+        "order": 1,
+        "short_name": "ABW",
+        "long_name": "Aruba",
+        "isd_code": "+297",
+        "active": false
+    },
+    {
+        "order": 2,
+        "short_name": "AFG",
+        "long_name": "Afghanistan",
+        "isd_code": "+93",
+        "active": false
+    },
+    {
+        "order": 3,
+        "short_name": "AGO",
+        "long_name": "Angola",
+        "isd_code": "+244",
+        "active": false
+    },
+    {
+        "order": 4,
+        "short_name": "AIA",
+        "long_name": "Anguilla",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 5,
+        "short_name": "ALA",
+        "long_name": "Åland Islands",
+        "isd_code": "+358",
+        "active": false
+    },
+    {
+        "order": 6,
+        "short_name": "ALB",
+        "long_name": "Albania",
+        "isd_code": "+355",
+        "active": false
+    },
+    {
+        "order": 7,
+        "short_name": "AND",
+        "long_name": "Andorra",
+        "isd_code": "+376",
+        "active": false
+    },
+    {
+        "order": 8,
+        "short_name": "ARE",
+        "long_name": "United Arab Emirates",
+        "isd_code": "+971",
+        "active": false
+    },
+    {
+        "order": 9,
+        "short_name": "ARG",
+        "long_name": "Argentina",
+        "isd_code": "+54",
+        "active": false
+    },
+    {
+        "order": 10,
+        "short_name": "ARM",
+        "long_name": "Armenia",
+        "isd_code": "+374",
+        "active": false
+    },
+    {
+        "order": 11,
+        "short_name": "ASM",
+        "long_name": "American Samoa",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 12,
+        "short_name": "ATA",
+        "long_name": "Antarctica",
+        "isd_code": "+0",
+        "active": false
+    },
+    {
+        "order": 13,
+        "short_name": "ATF",
+        "long_name": "French Southern Territories",
+        "isd_code": "+0",
+        "active": false
+    },
+    {
+        "order": 14,
+        "short_name": "ATG",
+        "long_name": "Antigua and Barbuda",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 15,
+        "short_name": "AUS",
+        "long_name": "Australia",
+        "isd_code": "+61",
+        "active": false
+    },
+    {
+        "order": 16,
+        "short_name": "AUT",
+        "long_name": "Austria",
+        "isd_code": "+43",
+        "active": false
+    },
+    {
+        "order": 17,
+        "short_name": "AZE",
+        "long_name": "Azerbaijan",
+        "isd_code": "+994",
+        "active": false
+    },
+    {
+        "order": 18,
+        "short_name": "BDI",
+        "long_name": "Burundi",
+        "isd_code": "+257",
+        "active": false
+    },
+    {
+        "order": 19,
+        "short_name": "BEL",
+        "long_name": "Belgium",
+        "isd_code": "+32",
+        "active": false
+    },
+    {
+        "order": 20,
+        "short_name": "BEN",
+        "long_name": "Benin",
+        "isd_code": "+229",
+        "active": false
+    },
+    {
+        "order": 21,
+        "short_name": "BES",
+        "long_name": "Bonaire, Sint Eustatius and Saba",
+        "isd_code": "+599",
+        "active": false
+    },
+    {
+        "order": 22,
+        "short_name": "BFA",
+        "long_name": "Burkina Faso",
+        "isd_code": "+226",
+        "active": false
+    },
+    {
+        "order": 23,
+        "short_name": "BGD",
+        "long_name": "Bangladesh",
+        "isd_code": "+880",
+        "active": false
+    },
+    {
+        "order": 24,
+        "short_name": "BGR",
+        "long_name": "Bulgaria",
+        "isd_code": "+359",
+        "active": false
+    },
+    {
+        "order": 25,
+        "short_name": "BHR",
+        "long_name": "Bahrain",
+        "isd_code": "+973",
+        "active": false
+    },
+    {
+        "order": 26,
+        "short_name": "BHS",
+        "long_name": "Bahamas",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 27,
+        "short_name": "BIH",
+        "long_name": "Bosnia and Herzegovina",
+        "isd_code": "+387",
+        "active": false
+    },
+    {
+        "order": 28,
+        "short_name": "BLM",
+        "long_name": "Saint Barthélemy",
+        "isd_code": "+590",
+        "active": false
+    },
+    {
+        "order": 29,
+        "short_name": "BLR",
+        "long_name": "Belarus",
+        "isd_code": "+375",
+        "active": false
+    },
+    {
+        "order": 30,
+        "short_name": "BLZ",
+        "long_name": "Belize",
+        "isd_code": "+501",
+        "active": false
+    },
+    {
+        "order": 31,
+        "short_name": "BMU",
+        "long_name": "Bermuda",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 32,
+        "short_name": "BOL",
+        "long_name": "Bolivia, Plurinational State of",
+        "isd_code": "+591",
+        "active": false
+    },
+    {
+        "order": 33,
+        "short_name": "BRA",
+        "long_name": "Brazil",
+        "isd_code": "+55",
+        "active": false
+    },
+    {
+        "order": 34,
+        "short_name": "BRB",
+        "long_name": "Barbados",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 35,
+        "short_name": "BRN",
+        "long_name": "Brunei Darussalam",
+        "isd_code": "+673",
+        "active": false
+    },
+    {
+        "order": 36,
+        "short_name": "BTN",
+        "long_name": "Bhutan",
+        "isd_code": "+975",
+        "active": false
+    },
+    {
+        "order": 37,
+        "short_name": "BVT",
+        "long_name": "Bouvet Island",
+        "isd_code": "+0",
+        "active": false
+    },
+    {
+        "order": 38,
+        "short_name": "BWA",
+        "long_name": "Botswana",
+        "isd_code": "+267",
+        "active": false
+    },
+    {
+        "order": 39,
+        "short_name": "CAF",
+        "long_name": "Central African Republic",
+        "isd_code": "+236",
+        "active": false
+    },
+    {
+        "order": 40,
+        "short_name": "CAN",
+        "long_name": "Canada",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 41,
+        "short_name": "CCK",
+        "long_name": "Cocos (Keeling) Islands",
+        "isd_code": "+61",
+        "active": false
+    },
+    {
+        "order": 42,
+        "short_name": "CHE",
+        "long_name": "Switzerland",
+        "isd_code": "+41",
+        "active": false
+    },
+    {
+        "order": 43,
+        "short_name": "CHL",
+        "long_name": "Chile",
+        "isd_code": "+56",
+        "active": false
+    },
+    {
+        "order": 44,
+        "short_name": "CHN",
+        "long_name": "China",
+        "isd_code": "+86",
+        "active": false
+    },
+    {
+        "order": 45,
+        "short_name": "CIV",
+        "long_name": "Côte d'Ivoire",
+        "isd_code": "+225",
+        "active": false
+    },
+    {
+        "order": 46,
+        "short_name": "CMR",
+        "long_name": "Cameroon",
+        "isd_code": "+237",
+        "active": false
+    },
+    {
+        "order": 47,
+        "short_name": "COD",
+        "long_name": "Congo, The Democratic Republic of the",
+        "isd_code": "+243",
+        "active": false
+    },
+    {
+        "order": 48,
+        "short_name": "COG",
+        "long_name": "Congo",
+        "isd_code": "+242",
+        "active": false
+    },
+    {
+        "order": 49,
+        "short_name": "COK",
+        "long_name": "Cook Islands",
+        "isd_code": "+682",
+        "active": false
+    },
+    {
+        "order": 50,
+        "short_name": "COL",
+        "long_name": "Colombia",
+        "isd_code": "+57",
+        "active": false
+    },
+    {
+        "order": 51,
+        "short_name": "COM",
+        "long_name": "Comoros",
+        "isd_code": "+269",
+        "active": false
+    },
+    {
+        "order": 52,
+        "short_name": "CPV",
+        "long_name": "Cabo Verde",
+        "isd_code": "+238",
+        "active": false
+    },
+    {
+        "order": 53,
+        "short_name": "CRI",
+        "long_name": "Costa Rica",
+        "isd_code": "+506",
+        "active": true
+    },
+    {
+        "order": 54,
+        "short_name": "CUB",
+        "long_name": "Cuba",
+        "isd_code": "+53",
+        "active": false
+    },
+    {
+        "order": 55,
+        "short_name": "CUW",
+        "long_name": "Curaçao",
+        "isd_code": "+599",
+        "active": false
+    },
+    {
+        "order": 56,
+        "short_name": "CXR",
+        "long_name": "Christmas Island",
+        "isd_code": "+61",
+        "active": false
+    },
+    {
+        "order": 57,
+        "short_name": "CYM",
+        "long_name": "Cayman Islands",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 58,
+        "short_name": "CYP",
+        "long_name": "Cyprus",
+        "isd_code": "+357",
+        "active": false
+    },
+    {
+        "order": 59,
+        "short_name": "CZE",
+        "long_name": "Czechia",
+        "isd_code": "+420",
+        "active": false
+    },
+    {
+        "order": 60,
+        "short_name": "DEU",
+        "long_name": "Germany",
+        "isd_code": "+49",
+        "active": false
+    },
+    {
+        "order": 61,
+        "short_name": "DJI",
+        "long_name": "Djibouti",
+        "isd_code": "+253",
+        "active": false
+    },
+    {
+        "order": 62,
+        "short_name": "DMA",
+        "long_name": "Dominica",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 63,
+        "short_name": "DNK",
+        "long_name": "Denmark",
+        "isd_code": "+45",
+        "active": false
+    },
+    {
+        "order": 64,
+        "short_name": "DOM",
+        "long_name": "Dominican Republic",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 65,
+        "short_name": "DZA",
+        "long_name": "Algeria",
+        "isd_code": "+213",
+        "active": false
+    },
+    {
+        "order": 66,
+        "short_name": "ECU",
+        "long_name": "Ecuador",
+        "isd_code": "+593",
+        "active": false
+    },
+    {
+        "order": 67,
+        "short_name": "EGY",
+        "long_name": "Egypt",
+        "isd_code": "+20",
+        "active": false
+    },
+    {
+        "order": 68,
+        "short_name": "ERI",
+        "long_name": "Eritrea",
+        "isd_code": "+291",
+        "active": false
+    },
+    {
+        "order": 69,
+        "short_name": "ESH",
+        "long_name": "Western Sahara",
+        "isd_code": "+212",
+        "active": false
+    },
+    {
+        "order": 70,
+        "short_name": "ESP",
+        "long_name": "Spain",
+        "isd_code": "+34",
+        "active": false
+    },
+    {
+        "order": 71,
+        "short_name": "EST",
+        "long_name": "Estonia",
+        "isd_code": "+372",
+        "active": false
+    },
+    {
+        "order": 72,
+        "short_name": "ETH",
+        "long_name": "Ethiopia",
+        "isd_code": "+251",
+        "active": false
+    },
+    {
+        "order": 73,
+        "short_name": "FIN",
+        "long_name": "Finland",
+        "isd_code": "+358",
+        "active": false
+    },
+    {
+        "order": 74,
+        "short_name": "FJI",
+        "long_name": "Fiji",
+        "isd_code": "+679",
+        "active": false
+    },
+    {
+        "order": 75,
+        "short_name": "FLK",
+        "long_name": "Falkland Islands (Malvinas)",
+        "isd_code": "+500",
+        "active": false
+    },
+    {
+        "order": 76,
+        "short_name": "FRA",
+        "long_name": "France",
+        "isd_code": "+33",
+        "active": false
+    },
+    {
+        "order": 77,
+        "short_name": "FRO",
+        "long_name": "Faroe Islands",
+        "isd_code": "+298",
+        "active": false
+    },
+    {
+        "order": 78,
+        "short_name": "FSM",
+        "long_name": "Micronesia, Federated States of",
+        "isd_code": "+691",
+        "active": false
+    },
+    {
+        "order": 79,
+        "short_name": "GAB",
+        "long_name": "Gabon",
+        "isd_code": "+241",
+        "active": false
+    },
+    {
+        "order": 80,
+        "short_name": "GBR",
+        "long_name": "United Kingdom",
+        "isd_code": "+44",
+        "active": false
+    },
+    {
+        "order": 81,
+        "short_name": "GEO",
+        "long_name": "Georgia",
+        "isd_code": "+995",
+        "active": false
+    },
+    {
+        "order": 82,
+        "short_name": "GGY",
+        "long_name": "Guernsey",
+        "isd_code": "+44",
+        "active": false
+    },
+    {
+        "order": 83,
+        "short_name": "GHA",
+        "long_name": "Ghana",
+        "isd_code": "+233",
+        "active": false
+    },
+    {
+        "order": 84,
+        "short_name": "GIB",
+        "long_name": "Gibraltar",
+        "isd_code": "+350",
+        "active": false
+    },
+    {
+        "order": 85,
+        "short_name": "GIN",
+        "long_name": "Guinea",
+        "isd_code": "+224",
+        "active": false
+    },
+    {
+        "order": 86,
+        "short_name": "GLP",
+        "long_name": "Guadeloupe",
+        "isd_code": "+590",
+        "active": false
+    },
+    {
+        "order": 87,
+        "short_name": "GMB",
+        "long_name": "Gambia",
+        "isd_code": "+220",
+        "active": false
+    },
+    {
+        "order": 88,
+        "short_name": "GNB",
+        "long_name": "Guinea-Bissau",
+        "isd_code": "+245",
+        "active": false
+    },
+    {
+        "order": 89,
+        "short_name": "GNQ",
+        "long_name": "Equatorial Guinea",
+        "isd_code": "+240",
+        "active": false
+    },
+    {
+        "order": 90,
+        "short_name": "GRC",
+        "long_name": "Greece",
+        "isd_code": "+30",
+        "active": false
+    },
+    {
+        "order": 91,
+        "short_name": "GRD",
+        "long_name": "Grenada",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 92,
+        "short_name": "GRL",
+        "long_name": "Greenland",
+        "isd_code": "+299",
+        "active": false
+    },
+    {
+        "order": 93,
+        "short_name": "GTM",
+        "long_name": "Guatemala",
+        "isd_code": "+502",
+        "active": false
+    },
+    {
+        "order": 94,
+        "short_name": "GUF",
+        "long_name": "French Guiana",
+        "isd_code": "+594",
+        "active": false
+    },
+    {
+        "order": 95,
+        "short_name": "GUM",
+        "long_name": "Guam",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 96,
+        "short_name": "GUY",
+        "long_name": "Guyana",
+        "isd_code": "+592",
+        "active": false
+    },
+    {
+        "order": 97,
+        "short_name": "HKG",
+        "long_name": "Hong Kong",
+        "isd_code": "+852",
+        "active": false
+    },
+    {
+        "order": 98,
+        "short_name": "HMD",
+        "long_name": "Heard Island and McDonald Islands",
+        "isd_code": "+0",
+        "active": false
+    },
+    {
+        "order": 99,
+        "short_name": "HND",
+        "long_name": "Honduras",
+        "isd_code": "+504",
+        "active": false
+    },
+    {
+        "order": 100,
+        "short_name": "HRV",
+        "long_name": "Croatia",
+        "isd_code": "+385",
+        "active": false
+    },
+    {
+        "order": 101,
+        "short_name": "HTI",
+        "long_name": "Haiti",
+        "isd_code": "+509",
+        "active": false
+    },
+    {
+        "order": 102,
+        "short_name": "HUN",
+        "long_name": "Hungary",
+        "isd_code": "+36",
+        "active": true
+    },
+    {
+        "order": 103,
+        "short_name": "IDN",
+        "long_name": "Indonesia",
+        "isd_code": "+62",
+        "active": false
+    },
+    {
+        "order": 104,
+        "short_name": "IMN",
+        "long_name": "Isle of Man",
+        "isd_code": "+44",
+        "active": false
+    },
+    {
+        "order": 105,
+        "short_name": "IND",
+        "long_name": "India",
+        "isd_code": "+91",
+        "active": true
+    },
+    {
+        "order": 106,
+        "short_name": "IOT",
+        "long_name": "British Indian Ocean Territory",
+        "isd_code": "+246",
+        "active": false
+    },
+    {
+        "order": 107,
+        "short_name": "IRL",
+        "long_name": "Ireland",
+        "isd_code": "+353",
+        "active": false
+    },
+    {
+        "order": 108,
+        "short_name": "IRN",
+        "long_name": "Iran, Islamic Republic of",
+        "isd_code": "+98",
+        "active": false
+    },
+    {
+        "order": 109,
+        "short_name": "IRQ",
+        "long_name": "Iraq",
+        "isd_code": "+964",
+        "active": false
+    },
+    {
+        "order": 110,
+        "short_name": "ISL",
+        "long_name": "Iceland",
+        "isd_code": "+354",
+        "active": false
+    },
+    {
+        "order": 111,
+        "short_name": "ISR",
+        "long_name": "Israel",
+        "isd_code": "+972",
+        "active": false
+    },
+    {
+        "order": 112,
+        "short_name": "ITA",
+        "long_name": "Italy",
+        "isd_code": "+39",
+        "active": false
+    },
+    {
+        "order": 113,
+        "short_name": "JAM",
+        "long_name": "Jamaica",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 114,
+        "short_name": "JEY",
+        "long_name": "Jersey",
+        "isd_code": "+44",
+        "active": false
+    },
+    {
+        "order": 115,
+        "short_name": "JOR",
+        "long_name": "Jordan",
+        "isd_code": "+962",
+        "active": false
+    },
+    {
+        "order": 116,
+        "short_name": "JPN",
+        "long_name": "Japan",
+        "isd_code": "+81",
+        "active": false
+    },
+    {
+        "order": 117,
+        "short_name": "KAZ",
+        "long_name": "Kazakhstan",
+        "isd_code": "+7",
+        "active": false
+    },
+    {
+        "order": 118,
+        "short_name": "KEN",
+        "long_name": "Kenya",
+        "isd_code": "+254",
+        "active": false
+    },
+    {
+        "order": 119,
+        "short_name": "KGZ",
+        "long_name": "Kyrgyzstan",
+        "isd_code": "+996",
+        "active": false
+    },
+    {
+        "order": 120,
+        "short_name": "KHM",
+        "long_name": "Cambodia",
+        "isd_code": "+855",
+        "active": false
+    },
+    {
+        "order": 121,
+        "short_name": "KIR",
+        "long_name": "Kiribati",
+        "isd_code": "+686",
+        "active": false
+    },
+    {
+        "order": 122,
+        "short_name": "KNA",
+        "long_name": "Saint Kitts and Nevis",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 123,
+        "short_name": "KOR",
+        "long_name": "Korea, Republic of",
+        "isd_code": "+82",
+        "active": false
+    },
+    {
+        "order": 124,
+        "short_name": "KWT",
+        "long_name": "Kuwait",
+        "isd_code": "+965",
+        "active": false
+    },
+    {
+        "order": 125,
+        "short_name": "LAO",
+        "long_name": "Lao People's Democratic Republic",
+        "isd_code": "+856",
+        "active": false
+    },
+    {
+        "order": 126,
+        "short_name": "LBN",
+        "long_name": "Lebanon",
+        "isd_code": "+961",
+        "active": false
+    },
+    {
+        "order": 127,
+        "short_name": "LBR",
+        "long_name": "Liberia",
+        "isd_code": "+231",
+        "active": false
+    },
+    {
+        "order": 128,
+        "short_name": "LBY",
+        "long_name": "Libya",
+        "isd_code": "+218",
+        "active": false
+    },
+    {
+        "order": 129,
+        "short_name": "LCA",
+        "long_name": "Saint Lucia",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 130,
+        "short_name": "LIE",
+        "long_name": "Liechtenstein",
+        "isd_code": "+423",
+        "active": false
+    },
+    {
+        "order": 131,
+        "short_name": "LKA",
+        "long_name": "Sri Lanka",
+        "isd_code": "+94",
+        "active": false
+    },
+    {
+        "order": 132,
+        "short_name": "LSO",
+        "long_name": "Lesotho",
+        "isd_code": "+266",
+        "active": false
+    },
+    {
+        "order": 133,
+        "short_name": "LTU",
+        "long_name": "Lithuania",
+        "isd_code": "+370",
+        "active": false
+    },
+    {
+        "order": 134,
+        "short_name": "LUX",
+        "long_name": "Luxembourg",
+        "isd_code": "+352",
+        "active": false
+    },
+    {
+        "order": 135,
+        "short_name": "LVA",
+        "long_name": "Latvia",
+        "isd_code": "+371",
+        "active": false
+    },
+    {
+        "order": 136,
+        "short_name": "MAC",
+        "long_name": "Macao",
+        "isd_code": "+853",
+        "active": false
+    },
+    {
+        "order": 137,
+        "short_name": "MAF",
+        "long_name": "Saint Martin (French part)",
+        "isd_code": "+590",
+        "active": false
+    },
+    {
+        "order": 138,
+        "short_name": "MAR",
+        "long_name": "Morocco",
+        "isd_code": "+212",
+        "active": false
+    },
+    {
+        "order": 139,
+        "short_name": "MCO",
+        "long_name": "Monaco",
+        "isd_code": "+377",
+        "active": false
+    },
+    {
+        "order": 140,
+        "short_name": "MDA",
+        "long_name": "Moldova, Republic of",
+        "isd_code": "+373",
+        "active": false
+    },
+    {
+        "order": 141,
+        "short_name": "MDG",
+        "long_name": "Madagascar",
+        "isd_code": "+261",
+        "active": false
+    },
+    {
+        "order": 142,
+        "short_name": "MDV",
+        "long_name": "Maldives",
+        "isd_code": "+960",
+        "active": false
+    },
+    {
+        "order": 143,
+        "short_name": "MEX",
+        "long_name": "Mexico",
+        "isd_code": "+52",
+        "active": true
+    },
+    {
+        "order": 144,
+        "short_name": "MHL",
+        "long_name": "Marshall Islands",
+        "isd_code": "+692",
+        "active": false
+    },
+    {
+        "order": 145,
+        "short_name": "MKD",
+        "long_name": "North Macedonia",
+        "isd_code": "+389",
+        "active": false
+    },
+    {
+        "order": 146,
+        "short_name": "MLI",
+        "long_name": "Mali",
+        "isd_code": "+223",
+        "active": false
+    },
+    {
+        "order": 147,
+        "short_name": "MLT",
+        "long_name": "Malta",
+        "isd_code": "+356",
+        "active": false
+    },
+    {
+        "order": 148,
+        "short_name": "MMR",
+        "long_name": "Myanmar",
+        "isd_code": "+95",
+        "active": false
+    },
+    {
+        "order": 149,
+        "short_name": "MNE",
+        "long_name": "Montenegro",
+        "isd_code": "+382",
+        "active": false
+    },
+    {
+        "order": 150,
+        "short_name": "MNG",
+        "long_name": "Mongolia",
+        "isd_code": "+976",
+        "active": false
+    },
+    {
+        "order": 151,
+        "short_name": "MNP",
+        "long_name": "Northern Mariana Islands",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 152,
+        "short_name": "MOZ",
+        "long_name": "Mozambique",
+        "isd_code": "+258",
+        "active": false
+    },
+    {
+        "order": 153,
+        "short_name": "MRT",
+        "long_name": "Mauritania",
+        "isd_code": "+222",
+        "active": false
+    },
+    {
+        "order": 154,
+        "short_name": "MSR",
+        "long_name": "Montserrat",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 155,
+        "short_name": "MTQ",
+        "long_name": "Martinique",
+        "isd_code": "+596",
+        "active": false
+    },
+    {
+        "order": 156,
+        "short_name": "MUS",
+        "long_name": "Mauritius",
+        "isd_code": "+230",
+        "active": false
+    },
+    {
+        "order": 157,
+        "short_name": "MWI",
+        "long_name": "Malawi",
+        "isd_code": "+265",
+        "active": false
+    },
+    {
+        "order": 158,
+        "short_name": "MYS",
+        "long_name": "Malaysia",
+        "isd_code": "+60",
+        "active": false
+    },
+    {
+        "order": 159,
+        "short_name": "MYT",
+        "long_name": "Mayotte",
+        "isd_code": "+262",
+        "active": false
+    },
+    {
+        "order": 160,
+        "short_name": "NAM",
+        "long_name": "Namibia",
+        "isd_code": "+264",
+        "active": false
+    },
+    {
+        "order": 161,
+        "short_name": "NCL",
+        "long_name": "New Caledonia",
+        "isd_code": "+687",
+        "active": false
+    },
+    {
+        "order": 162,
+        "short_name": "NER",
+        "long_name": "Niger",
+        "isd_code": "+227",
+        "active": false
+    },
+    {
+        "order": 163,
+        "short_name": "NFK",
+        "long_name": "Norfolk Island",
+        "isd_code": "+672",
+        "active": false
+    },
+    {
+        "order": 164,
+        "short_name": "NGA",
+        "long_name": "Nigeria",
+        "isd_code": "+234",
+        "active": false
+    },
+    {
+        "order": 165,
+        "short_name": "NIC",
+        "long_name": "Nicaragua",
+        "isd_code": "+505",
+        "active": false
+    },
+    {
+        "order": 166,
+        "short_name": "NIU",
+        "long_name": "Niue",
+        "isd_code": "+683",
+        "active": false
+    },
+    {
+        "order": 167,
+        "short_name": "NLD",
+        "long_name": "Netherlands",
+        "isd_code": "+31",
+        "active": false
+    },
+    {
+        "order": 168,
+        "short_name": "NOR",
+        "long_name": "Norway",
+        "isd_code": "+47",
+        "active": false
+    },
+    {
+        "order": 169,
+        "short_name": "NPL",
+        "long_name": "Nepal",
+        "isd_code": "+977",
+        "active": false
+    },
+    {
+        "order": 170,
+        "short_name": "NRU",
+        "long_name": "Nauru",
+        "isd_code": "+674",
+        "active": false
+    },
+    {
+        "order": 171,
+        "short_name": "NZL",
+        "long_name": "New Zealand",
+        "isd_code": "+64",
+        "active": false
+    },
+    {
+        "order": 172,
+        "short_name": "OMN",
+        "long_name": "Oman",
+        "isd_code": "+968",
+        "active": false
+    },
+    {
+        "order": 173,
+        "short_name": "PAK",
+        "long_name": "Pakistan",
+        "isd_code": "+92",
+        "active": false
+    },
+    {
+        "order": 174,
+        "short_name": "PAN",
+        "long_name": "Panama",
+        "isd_code": "+507",
+        "active": false
+    },
+    {
+        "order": 175,
+        "short_name": "PCN",
+        "long_name": "Pitcairn",
+        "isd_code": "+0",
+        "active": false
+    },
+    {
+        "order": 176,
+        "short_name": "PER",
+        "long_name": "Peru",
+        "isd_code": "+51",
+        "active": false
+    },
+    {
+        "order": 177,
+        "short_name": "PHL",
+        "long_name": "Philippines",
+        "isd_code": "+63",
+        "active": false
+    },
+    {
+        "order": 178,
+        "short_name": "PLW",
+        "long_name": "Palau",
+        "isd_code": "+680",
+        "active": false
+    },
+    {
+        "order": 179,
+        "short_name": "PNG",
+        "long_name": "Papua New Guinea",
+        "isd_code": "+675",
+        "active": false
+    },
+    {
+        "order": 180,
+        "short_name": "POL",
+        "long_name": "Poland",
+        "isd_code": "+48",
+        "active": false
+    },
+    {
+        "order": 181,
+        "short_name": "PRI",
+        "long_name": "Puerto Rico",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 182,
+        "short_name": "PRK",
+        "long_name": "Korea, Democratic People's Republic of",
+        "isd_code": "+850",
+        "active": false
+    },
+    {
+        "order": 183,
+        "short_name": "PRT",
+        "long_name": "Portugal",
+        "isd_code": "+351",
+        "active": false
+    },
+    {
+        "order": 184,
+        "short_name": "PRY",
+        "long_name": "Paraguay",
+        "isd_code": "+595",
+        "active": false
+    },
+    {
+        "order": 185,
+        "short_name": "PSE",
+        "long_name": "Palestine, State of",
+        "isd_code": "+970",
+        "active": false
+    },
+    {
+        "order": 186,
+        "short_name": "PYF",
+        "long_name": "French Polynesia",
+        "isd_code": "+689",
+        "active": false
+    },
+    {
+        "order": 187,
+        "short_name": "QAT",
+        "long_name": "Qatar",
+        "isd_code": "+974",
+        "active": false
+    },
+    {
+        "order": 188,
+        "short_name": "REU",
+        "long_name": "Réunion",
+        "isd_code": "+262",
+        "active": false
+    },
+    {
+        "order": 189,
+        "short_name": "ROU",
+        "long_name": "Romania",
+        "isd_code": "+40",
+        "active": false
+    },
+    {
+        "order": 190,
+        "short_name": "RUS",
+        "long_name": "Russian Federation",
+        "isd_code": "+7",
+        "active": false
+    },
+    {
+        "order": 191,
+        "short_name": "RWA",
+        "long_name": "Rwanda",
+        "isd_code": "+250",
+        "active": false
+    },
+    {
+        "order": 192,
+        "short_name": "SAU",
+        "long_name": "Saudi Arabia",
+        "isd_code": "+966",
+        "active": false
+    },
+    {
+        "order": 193,
+        "short_name": "SDN",
+        "long_name": "Sudan",
+        "isd_code": "+249",
+        "active": false
+    },
+    {
+        "order": 194,
+        "short_name": "SEN",
+        "long_name": "Senegal",
+        "isd_code": "+221",
+        "active": false
+    },
+    {
+        "order": 195,
+        "short_name": "SGP",
+        "long_name": "Singapore",
+        "isd_code": "+65",
+        "active": false
+    },
+    {
+        "order": 196,
+        "short_name": "SGS",
+        "long_name": "South Georgia and the South Sandwich Islands",
+        "isd_code": "+0",
+        "active": false
+    },
+    {
+        "order": 197,
+        "short_name": "SHN",
+        "long_name": "Saint Helena, Ascension and Tristan da Cunha",
+        "isd_code": "+290",
+        "active": false
+    },
+    {
+        "order": 198,
+        "short_name": "SJM",
+        "long_name": "Svalbard and Jan Mayen",
+        "isd_code": "+47",
+        "active": false
+    },
+    {
+        "order": 199,
+        "short_name": "SLB",
+        "long_name": "Solomon Islands",
+        "isd_code": "+677",
+        "active": false
+    },
+    {
+        "order": 200,
+        "short_name": "SLE",
+        "long_name": "Sierra Leone",
+        "isd_code": "+232",
+        "active": false
+    },
+    {
+        "order": 201,
+        "short_name": "SLV",
+        "long_name": "El Salvador",
+        "isd_code": "+503",
+        "active": false
+    },
+    {
+        "order": 202,
+        "short_name": "SMR",
+        "long_name": "San Marino",
+        "isd_code": "+378",
+        "active": false
+    },
+    {
+        "order": 203,
+        "short_name": "SOM",
+        "long_name": "Somalia",
+        "isd_code": "+252",
+        "active": false
+    },
+    {
+        "order": 204,
+        "short_name": "SPM",
+        "long_name": "Saint Pierre and Miquelon",
+        "isd_code": "+508",
+        "active": false
+    },
+    {
+        "order": 205,
+        "short_name": "SRB",
+        "long_name": "Serbia",
+        "isd_code": "+381",
+        "active": false
+    },
+    {
+        "order": 206,
+        "short_name": "SSD",
+        "long_name": "South Sudan",
+        "isd_code": "+211",
+        "active": false
+    },
+    {
+        "order": 207,
+        "short_name": "STP",
+        "long_name": "Sao Tome and Principe",
+        "isd_code": "+239",
+        "active": false
+    },
+    {
+        "order": 208,
+        "short_name": "SUR",
+        "long_name": "Suriname",
+        "isd_code": "+597",
+        "active": false
+    },
+    {
+        "order": 209,
+        "short_name": "SVK",
+        "long_name": "Slovakia",
+        "isd_code": "+421",
+        "active": false
+    },
+    {
+        "order": 210,
+        "short_name": "SVN",
+        "long_name": "Slovenia",
+        "isd_code": "+386",
+        "active": false
+    },
+    {
+        "order": 211,
+        "short_name": "SWE",
+        "long_name": "Sweden",
+        "isd_code": "+46",
+        "active": false
+    },
+    {
+        "order": 212,
+        "short_name": "SWZ",
+        "long_name": "Eswatini",
+        "isd_code": "+268",
+        "active": false
+    },
+    {
+        "order": 213,
+        "short_name": "SXM",
+        "long_name": "Sint Maarten (Dutch part)",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 214,
+        "short_name": "SYC",
+        "long_name": "Seychelles",
+        "isd_code": "+248",
+        "active": false
+    },
+    {
+        "order": 215,
+        "short_name": "SYR",
+        "long_name": "Syrian Arab Republic",
+        "isd_code": "+963",
+        "active": false
+    },
+    {
+        "order": 216,
+        "short_name": "TCA",
+        "long_name": "Turks and Caicos Islands",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 217,
+        "short_name": "TCD",
+        "long_name": "Chad",
+        "isd_code": "+235",
+        "active": false
+    },
+    {
+        "order": 218,
+        "short_name": "TGO",
+        "long_name": "Togo",
+        "isd_code": "+228",
+        "active": false
+    },
+    {
+        "order": 219,
+        "short_name": "THA",
+        "long_name": "Thailand",
+        "isd_code": "+66",
+        "active": true
+    },
+    {
+        "order": 220,
+        "short_name": "TJK",
+        "long_name": "Tajikistan",
+        "isd_code": "+992",
+        "active": false
+    },
+    {
+        "order": 221,
+        "short_name": "TKL",
+        "long_name": "Tokelau",
+        "isd_code": "+690",
+        "active": false
+    },
+    {
+        "order": 222,
+        "short_name": "TKM",
+        "long_name": "Turkmenistan",
+        "isd_code": "+993",
+        "active": false
+    },
+    {
+        "order": 223,
+        "short_name": "TLS",
+        "long_name": "Timor-Leste",
+        "isd_code": "+670",
+        "active": false
+    },
+    {
+        "order": 224,
+        "short_name": "TON",
+        "long_name": "Tonga",
+        "isd_code": "+676",
+        "active": false
+    },
+    {
+        "order": 225,
+        "short_name": "TTO",
+        "long_name": "Trinidad and Tobago",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 226,
+        "short_name": "TUN",
+        "long_name": "Tunisia",
+        "isd_code": "+216",
+        "active": false
+    },
+    {
+        "order": 227,
+        "short_name": "TUR",
+        "long_name": "Turkey",
+        "isd_code": "+90",
+        "active": true
+    },
+    {
+        "order": 228,
+        "short_name": "TUV",
+        "long_name": "Tuvalu",
+        "isd_code": "+688",
+        "active": false
+    },
+    {
+        "order": 229,
+        "short_name": "TWN",
+        "long_name": "Taiwan, Province of China",
+        "isd_code": "+886",
+        "active": false
+    },
+    {
+        "order": 230,
+        "short_name": "TZA",
+        "long_name": "Tanzania, United Republic of",
+        "isd_code": "+255",
+        "active": false
+    },
+    {
+        "order": 231,
+        "short_name": "UGA",
+        "long_name": "Uganda",
+        "isd_code": "+256",
+        "active": false
+    },
+    {
+        "order": 232,
+        "short_name": "UKR",
+        "long_name": "Ukraine",
+        "isd_code": "+380",
+        "active": false
+    },
+    {
+        "order": 233,
+        "short_name": "UMI",
+        "long_name": "United States Minor Outlying Islands",
+        "isd_code": "+0",
+        "active": false
+    },
+    {
+        "order": 234,
+        "short_name": "URY",
+        "long_name": "Uruguay",
+        "isd_code": "+598",
+        "active": false
+    },
+    {
+        "order": 235,
+        "short_name": "USA",
+        "long_name": "United States",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 236,
+        "short_name": "UZB",
+        "long_name": "Uzbekistan",
+        "isd_code": "+998",
+        "active": false
+    },
+    {
+        "order": 237,
+        "short_name": "VAT",
+        "long_name": "Holy See (Vatican City State)",
+        "isd_code": "+39",
+        "active": false
+    },
+    {
+        "order": 238,
+        "short_name": "VCT",
+        "long_name": "Saint Vincent and the Grenadines",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 239,
+        "short_name": "VEN",
+        "long_name": "Venezuela, Bolivarian Republic of",
+        "isd_code": "+58",
+        "active": false
+    },
+    {
+        "order": 240,
+        "short_name": "VGB",
+        "long_name": "Virgin Islands, British",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 241,
+        "short_name": "VIR",
+        "long_name": "Virgin Islands, U.S.",
+        "isd_code": "+1",
+        "active": false
+    },
+    {
+        "order": 242,
+        "short_name": "VNM",
+        "long_name": "Viet Nam",
+        "isd_code": "+84",
+        "active": false
+    },
+    {
+        "order": 243,
+        "short_name": "VUT",
+        "long_name": "Vanuatu",
+        "isd_code": "+678",
+        "active": false
+    },
+    {
+        "order": 244,
+        "short_name": "WLF",
+        "long_name": "Wallis and Futuna",
+        "isd_code": "+681",
+        "active": false
+    },
+    {
+        "order": 245,
+        "short_name": "WSM",
+        "long_name": "Samoa",
+        "isd_code": "+685",
+        "active": false
+    },
+    {
+        "order": 246,
+        "short_name": "YEM",
+        "long_name": "Yemen",
+        "isd_code": "+967",
+        "active": false
+    },
+    {
+        "order": 247,
+        "short_name": "ZAF",
+        "long_name": "South Africa",
+        "isd_code": "+27",
+        "active": false
+    },
+    {
+        "order": 248,
+        "short_name": "ZMB",
+        "long_name": "Zambia",
+        "isd_code": "+260",
+        "active": false
+    },
+    {
+        "order": 249,
+        "short_name": "ZWE",
+        "long_name": "Zimbabwe",
+        "isd_code": "+263",
+        "active": false
+    }
+]
