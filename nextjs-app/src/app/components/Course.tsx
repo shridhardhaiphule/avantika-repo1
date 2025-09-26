@@ -48,7 +48,7 @@ class Course extends Component<CourseProps, CourseState> {
 
     return (
       <div>
-        <label htmlFor="course" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="course" className="block text-sm font-medium text-slate-700 mb-2">
           Select Course *
         </label>
         <select
@@ -57,7 +57,7 @@ class Course extends Component<CourseProps, CourseState> {
           value={selectedCourse}
           onChange={this.handleCourseChange}
           required={required}
-          className={`w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900 ${className}`}
+          className={`w-full px-4 py-3 border border-slate-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white/70 backdrop-blur-sm text-slate-900 transition-all duration-200 hover:bg-white/90 ${className}`}
         >
           {SemiConstants.COURSE_DATA.map((course, index) => (
             <option 
