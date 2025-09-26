@@ -5,7 +5,7 @@ import { SemiConstants } from '../constants/SemiConstants';
 
 interface FormData {
   standardPricing: string;
-  bundledPackages: string[];
+  bundledPackages: string;
   paymentMethods: string[];
   financingOptions: string;
 }
@@ -20,7 +20,7 @@ class EnrollmentFormPart5 extends React.Component<Record<string, never>, Enrollm
     this.state = {
       formData: {
         standardPricing: '',
-        bundledPackages: [],
+        bundledPackages: '',
         paymentMethods: [],
         financingOptions: ''
       }
@@ -51,20 +51,7 @@ class EnrollmentFormPart5 extends React.Component<Record<string, never>, Enrollm
   handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked } = e.target;
     
-    if (name === 'bundledPackages') {
-      this.setState(prevState => {
-        const updatedPackages = checked
-          ? [...prevState.formData.bundledPackages, value]
-          : prevState.formData.bundledPackages.filter(pkg => pkg !== value);
-        
-        return {
-          formData: {
-            ...prevState.formData,
-            bundledPackages: updatedPackages
-          }
-        };
-      });
-    } else if (name === 'paymentMethods') {
+    if (name === 'paymentMethods') {
       this.setState(prevState => {
         const updatedMethods = checked
           ? [...prevState.formData.paymentMethods, value]
@@ -95,7 +82,7 @@ class EnrollmentFormPart5 extends React.Component<Record<string, never>, Enrollm
     
     // Validate required fields
     if (!this.state.formData.standardPricing || 
-        this.state.formData.bundledPackages.length === 0 || 
+        !this.state.formData.bundledPackages || 
         this.state.formData.paymentMethods.length === 0 ||
         !this.state.formData.financingOptions) {
       alert('Please fill in all required fields.');
@@ -167,12 +154,12 @@ class EnrollmentFormPart5 extends React.Component<Record<string, never>, Enrollm
                   {SemiConstants.BUNDLED_PACKAGES_OPTIONS.map((option, index) => (
                     <label key={index} className="flex items-center space-x-3 text-white cursor-pointer">
                       <input
-                        type="checkbox"
+                        type="radio"
                         name="bundledPackages"
                         value={option.value}
-                        checked={this.state.formData.bundledPackages.includes(option.value)}
-                        onChange={this.handleCheckboxChange}
-                        className="w-4 h-4 text-blue-600 bg-white/10 border-white/20 rounded focus:ring-blue-500"
+                        checked={this.state.formData.bundledPackages === option.value}
+                        onChange={this.handleRadioChange}
+                        className="w-4 h-4 text-blue-600 bg-white/10 border-white/20 focus:ring-blue-500"
                       />
                       <span className="text-sm">{option.label}</span>
                     </label>
